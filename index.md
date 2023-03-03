@@ -36,6 +36,24 @@ View [saved issues](issues.html), or the latest GitHub [issues](https://github.c
 | [HTTP Unprompted Authentication](moare-iana-notes/draft-ietf-httpbis-unprompted-auth.html "HTTP Unprompted Authentication (HTML)") | [plain text](moare-iana-notes/draft-ietf-httpbis-unprompted-auth.txt "HTTP Unprompted Authentication (Text)") | same as main |
 | [Retrofit Structured Fields](moare-iana-notes/draft-ietf-httpbis-retrofit.html "Retrofit Structured Fields for HTTP (HTML)") | [plain text](moare-iana-notes/draft-ietf-httpbis-retrofit.txt "Retrofit Structured Fields for HTTP (Text)") | same as main |
 
+## Preview for branch [content-contains-newlines](content-contains-newlines)
+
+| Draft |     |     |     |
+| ----- | --- | --- | --- |
+| [HTTP Message Signatures](content-contains-newlines/draft-ietf-httpbis-message-signatures.html "HTTP Message Signatures (HTML)") | [plain text](content-contains-newlines/draft-ietf-httpbis-message-signatures.txt "HTTP Message Signatures (Text)") | same as main |
+| [Cookies: HTTP State Management Mechanism](content-contains-newlines/draft-ietf-httpbis-rfc6265bis.html "Cookies: HTTP State Management Mechanism (HTML)") | [plain text](content-contains-newlines/draft-ietf-httpbis-rfc6265bis.txt "Cookies: HTTP State Management Mechanism (Text)") | same as main |
+| [The HTTP QUERY Method](content-contains-newlines/draft-ietf-httpbis-safe-method-w-body.html "The HTTP QUERY Method (HTML)") | [plain text](content-contains-newlines/draft-ietf-httpbis-safe-method-w-body.txt "The HTTP QUERY Method (Text)") | same as main |
+| [Client-Cert Header](content-contains-newlines/draft-ietf-httpbis-client-cert-field.html "Client-Cert HTTP Header Field (HTML)") | [plain text](content-contains-newlines/draft-ietf-httpbis-client-cert-field.txt "Client-Cert HTTP Header Field (Text)") | same as main |
+| [ORIGIN in HTTP/3](content-contains-newlines/draft-ietf-httpbis-origin-h3.html "The ORIGIN Extension in HTTP/3 (HTML)") | [plain text](content-contains-newlines/draft-ietf-httpbis-origin-h3.txt "The ORIGIN Extension in HTTP/3 (Text)") | same as main |
+| [DNS Aliases Proxy-Status](content-contains-newlines/draft-ietf-httpbis-alias-proxy-status.html "HTTP Proxy-Status Parameter for Next-Hop Aliases (HTML)") | [plain text](content-contains-newlines/draft-ietf-httpbis-alias-proxy-status.txt "HTTP Proxy-Status Parameter for Next-Hop Aliases (Text)") | same as main |
+| [Resumable Uploads](content-contains-newlines/draft-ietf-httpbis-resumable-upload.html "Resumable Uploads for HTTP (HTML)") | [plain text](content-contains-newlines/draft-ietf-httpbis-resumable-upload.txt "Resumable Uploads for HTTP (Text)") | same as main |
+| [Structured Field Values for HTTP](content-contains-newlines/draft-ietf-httpbis-sfbis.html "Structured Field Values for HTTP (HTML)") | [plain text](content-contains-newlines/draft-ietf-httpbis-sfbis.txt "Structured Field Values for HTTP (Text)") | same as main |
+| [Digest Fields](content-contains-newlines/draft-ietf-httpbis-digest-headers.html "Digest Fields (HTML)") | [plain text](content-contains-newlines/draft-ietf-httpbis-digest-headers.txt "Digest Fields (Text)") | [diff with main](https://www.ietf.org/rfcdiff?url1=https://httpwg.github.io/http-extensions/draft-ietf-httpbis-digest-headers.txt&url2=https://httpwg.github.io/http-extensions/content-contains-newlines/draft-ietf-httpbis-digest-headers.txt) |
+| [HTTP Representation Variants](content-contains-newlines/draft-ietf-httpbis-variants.html "HTTP Representation Variants (HTML)") | [plain text](content-contains-newlines/draft-ietf-httpbis-variants.txt "HTTP Representation Variants (Text)") | same as main |
+| [HTTP Alternative Services](content-contains-newlines/draft-ietf-httpbis-rfc7838bis.html "HTTP Alternative Services (HTML)") | [plain text](content-contains-newlines/draft-ietf-httpbis-rfc7838bis.txt "HTTP Alternative Services (Text)") | same as main |
+| [HTTP Unprompted Authentication](content-contains-newlines/draft-ietf-httpbis-unprompted-auth.html "HTTP Unprompted Authentication (HTML)") | [plain text](content-contains-newlines/draft-ietf-httpbis-unprompted-auth.txt "HTTP Unprompted Authentication (Text)") | same as main |
+| [Retrofit Structured Fields](content-contains-newlines/draft-ietf-httpbis-retrofit.html "Retrofit Structured Fields for HTTP (HTML)") | [plain text](content-contains-newlines/draft-ietf-httpbis-retrofit.txt "Retrofit Structured Fields for HTTP (Text)") | same as main |
+
 ## Preview for branch [resumable-upload](resumable-upload)
 
 ## Preview for branch [resumable-upload/correct-changes](resumable-upload/correct-changes)
