@@ -95,6 +95,8 @@ Table of Contents
      7.1.  HTTP Field Name Registration
      7.2.  Establish the Hash Algorithms for HTTP Digest Fields
            Registry
+     7.3.  Deprecate the Hypertext Transfer Protocol (HTTP) Digest
+           Algorithm Values Registry
    8.  References
      8.1.  Normative References
      8.2.  Informative References
@@ -770,6 +772,14 @@ Table of Contents
    +-----------+----------+----------------------------+--------------+
 
                      Table 2: Initial Hash Algorithms
+
+7.3.  Deprecate the Hypertext Transfer Protocol (HTTP) Digest Algorithm
+      Values Registry
+
+   IANA is requested to deprecate the "Hypertext Transfer Protocol
+   (HTTP) Digest Algorithm Values" registry at
+   https://www.iana.org/assignments/http-dig-alg/http-dig-alg.xhtml
+   (https://www.iana.org/assignments/http-dig-alg/http-dig-alg.xhtml).
 
 8.  References
 
