@@ -124,6 +124,8 @@ Table of Contents
    Acknowledgements
    Code Samples
    Changes
+     Since draft-ietf-httpbis-digest-headers-10
+     Since draft-ietf-httpbis-digest-headers-09
      Since draft-ietf-httpbis-digest-headers-08
      Since draft-ietf-httpbis-digest-headers-07
      Since draft-ietf-httpbis-digest-headers-06
@@ -1657,6 +1659,14 @@ Code Samples
 Changes
 
    This section is to be removed before publishing as an RFC.
+
+Since draft-ietf-httpbis-digest-headers-10
+
+   *  Editorial or minor changes
+
+Since draft-ietf-httpbis-digest-headers-09
+
+   *  Editorial or minor changes
 
 Since draft-ietf-httpbis-digest-headers-08
 
