@@ -1202,7 +1202,7 @@ fields.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-integrity-preference-fields" class="internal xref">Integrity preference fields</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-hash-algorithms-for-http-di" class="internal xref">Hash Algorithms for HTTP Digest Fields Registry</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-hash-algorithm-consideratio" class="internal xref">Hash Algorithm Considerations and Registration</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
@@ -1220,7 +1220,7 @@ fields.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
                 <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="auto internal xref">6.4</a>.  <a href="#name-usage-in-trailer-fields" class="internal xref">Usage in Trailer Fields</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.5">
-                <p id="section-toc.1-1.6.2.5.1"><a href="#section-6.5" class="auto internal xref">6.5</a>.  <a href="#name-usage-with-encryption" class="internal xref">Usage with Encryption</a></p>
+                <p id="section-toc.1-1.6.2.5.1"><a href="#section-6.5" class="auto internal xref">6.5</a>.  <a href="#name-variations-within-content-e" class="internal xref">Variations Within Content Encoding</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.6">
                 <p id="section-toc.1-1.6.2.6.1"><a href="#section-6.6" class="auto internal xref">6.6</a>.  <a href="#name-algorithm-agility" class="internal xref">Algorithm Agility</a></p>
@@ -1422,7 +1422,7 @@ of Repr-Digest and Want-Repr-Digest fields in message exchanges.<a href="#sectio
             </ul>
 </li>
           <li class="normal" id="section-1.1-2.3">
-            <a href="#algorithms" class="auto internal xref">Section 5</a> bootstraps a new IANA registry hash algorithms and defines
+            <a href="#algorithms" class="auto internal xref">Section 5</a> presents hash algorithm considerations and defines
 registration procedures for future entries.<a href="#section-1.1-2.3" class="pilcrow">¶</a>
 </li>
         </ul>
@@ -1739,118 +1739,71 @@ Want-Content-Digest: sha-512=3, sha-256=10, unixsum=0
 </div>
 <div id="algorithms">
 <section id="section-5">
-      <h2 id="name-hash-algorithms-for-http-di">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-hash-algorithms-for-http-di" class="section-name selfRef">Hash Algorithms for HTTP Digest Fields Registry</a>
+      <h2 id="name-hash-algorithm-consideratio">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-hash-algorithm-consideratio" class="section-name selfRef">Hash Algorithm Considerations and Registration</a>
       </h2>
-<p id="section-5-1">The "Hash Algorithms for HTTP Digest Fields", maintained by IANA at
-<a href="https://www.iana.org/assignments/http-dig-alg/">https://www.iana.org/assignments/http-dig-alg/</a>, registers algorithms for use
-with the Integrity and Integrity preference fields defined in this document.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">This registry uses the Specification
-Required policy (<span><a href="https://rfc-editor.org/rfc/rfc8126#section-4.6" class="relref">Section 4.6</a> of [<a href="#RFC8126" class="cite xref">RFC8126</a>]</span>).<a href="#section-5-2" class="pilcrow">¶</a></p>
-<p id="section-5-3">Registrations <span class="bcp14">MUST</span> include the following fields:<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-1">There are a wide variety of hashing algorithms that can be used for the purposes
+of integrity. The choice of algorithm depends on several factors such as the
+integrity use case, implementation needs or constraints, or application design
+and workflows.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">An initial set of algorithms will be registered with IANA in the "Hash
+Algorithms for HTTP Digest Fields" registry; see
+<a href="#establish-hash-algorithm-registry" class="auto internal xref">Section 7.2</a>. Additional algorithms can be registered
+in accordance with the policies set out in this section.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">Each algorithm has a status field, which is intended to provide an aid to
+implementation selection.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">Algorithms with a status value of "standard" are suitable for many purposes,
+including adversarial situations where hash functions might need to provide
+resistance to collision, first-preimage and second-preimage attacks. For
+adversarial situations, selecting which of the "standard" algorithms are
+acceptable will depend on the level of protection the circumstances demand. As
+there is no negotiation, endpoints that depend on a digest for security will be
+vulnerable to attacks on the weakest algorithm they are willing to accept.<a href="#section-5-4" class="pilcrow">¶</a></p>
+<p id="section-5-5">Algorithms with a status value of "insecure" either provide none of these
+properties, or are known to be weak (see <span>[<a href="#NO-MD5" class="cite xref">NO-MD5</a>]</span> and <span>[<a href="#NO-SHA" class="cite xref">NO-SHA</a>]</span>). These
+algorithms <span class="bcp14">MAY</span> be used to preserve integrity against corruption, but <span class="bcp14">MUST NOT</span> be
+used in a potentially adversarial setting; for example, when signing Integrity
+fields' values for authenticity.<a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-5-6">Discussion of algorithm agility is presented in <a href="#sec-agility" class="auto internal xref">Section 6.6</a>.<a href="#section-5-6" class="pilcrow">¶</a></p>
+<p id="section-5-7">Registration requests for the "Hash Algorithms for HTTP Digest Fields" registry
+use the Specification Required policy (<span><a href="https://rfc-editor.org/rfc/rfc8126#section-4.6" class="relref">Section 4.6</a> of [<a href="#RFC8126" class="cite xref">RFC8126</a>]</span>). Requests
+should use the following template:<a href="#section-5-7" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5-4.1">Algorithm Key: the Structured Fields key value used in
+<li class="normal" id="section-5-8.1">Algorithm Key: the Structured Fields key value used in
 <code>Content-Digest</code>, <code>Repr-Digest</code>, <code>Want-Content-Digest</code>, or <code>Want-Repr-Digest</code>
- field Dictionary member keys<a href="#section-5-4.1" class="pilcrow">¶</a>
+ field Dictionary member keys<a href="#section-5-8.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-5-4.2">
-          <p id="section-5-4.2.1">Status: the status of the algorithm.
-  Use "standard" for standardized algorithms without known problems;
-  "experimental" or some other appropriate value<a href="#section-5-4.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-5-8.2">
+          <p id="section-5-8.2.1">Status: the status of the algorithm. The options are:<a href="#section-5-8.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5-4.2.2.1">e.g. according to the type and status of the primary document
-  in which the algorithm is defined;
-  "insecure" when the algorithm is insecure;
-  "reserved" when the algorithm references a reserved token value<a href="#section-5-4.2.2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-5-8.2.2.1">"standard" - for standardized algorithms without known problems,<a href="#section-5-8.2.2.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-5-8.2.2.2">"provisional" - for non-standard or unproven algorithms,<a href="#section-5-8.2.2.2" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-5-8.2.2.3">"insecure" - for insecure algorithms,<a href="#section-5-8.2.2.3" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-5-8.2.2.4">"reserved"  - for algorithms that use a reserved token value that cannot be expressed in Structured Fields<a href="#section-5-8.2.2.4" class="pilcrow">¶</a>
 </li>
           </ul>
 </li>
-        <li class="normal" id="section-5-4.3">Description: a short description of the algorithm<a href="#section-5-4.3" class="pilcrow">¶</a>
+        <li class="normal" id="section-5-8.3">Description: a short description of the algorithm<a href="#section-5-8.3" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-5-4.4">Reference(s): a set of pointers to the primary documents defining the
-algorithm and key<a href="#section-5-4.4" class="pilcrow">¶</a>
+        <li class="normal" id="section-5-8.4">Reference(s): pointer(s) to the primary document(s) defining the technical
+details of the algorithm, and optionally the key<a href="#section-5-8.4" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="section-5-5">Insecure hashing algorithms <span class="bcp14">MAY</span> be used to preserve integrity against corruption,
-but <span class="bcp14">MUST NOT</span> be used in a potentially adversarial setting;
-for example, when signing Integrity fields' values for authenticity.<a href="#section-5-5" class="pilcrow">¶</a></p>
-<p id="section-5-6">The entries in <a href="#iana-hash-algorithm-table" class="auto internal xref">Table 1</a> are registered by this document.<a href="#section-5-6" class="pilcrow">¶</a></p>
-<span id="name-initial-hash-algorithms"></span><div id="iana-hash-algorithm-table">
-<table class="center" id="table-1">
-        <caption>
-<a href="#table-1" class="selfRef">Table 1</a>:
-<a href="#name-initial-hash-algorithms" class="selfRef">Initial Hash Algorithms</a>
-        </caption>
-<thead>
-          <tr>
-            <th class="text-left" rowspan="1" colspan="1">Algorithm Key</th>
-            <th class="text-left" rowspan="1" colspan="1">Status</th>
-            <th class="text-left" rowspan="1" colspan="1">Description</th>
-            <th class="text-left" rowspan="1" colspan="1">Reference(s)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">sha-512</td>
-            <td class="text-left" rowspan="1" colspan="1">standard</td>
-            <td class="text-left" rowspan="1" colspan="1">The SHA-512 algorithm.</td>
-            <td class="text-left" rowspan="1" colspan="1">
-              <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span>, <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, this document.</td>
-          </tr>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">sha-256</td>
-            <td class="text-left" rowspan="1" colspan="1">standard</td>
-            <td class="text-left" rowspan="1" colspan="1">The SHA-256 algorithm.</td>
-            <td class="text-left" rowspan="1" colspan="1">
-              <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span>, <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, this document.</td>
-          </tr>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">md5</td>
-            <td class="text-left" rowspan="1" colspan="1">insecure</td>
-            <td class="text-left" rowspan="1" colspan="1">The MD5 algorithm. It is vulnerable to collision attacks; see <span>[<a href="#NO-MD5" class="cite xref">NO-MD5</a>]</span> and <span>[<a href="#CMU-836068" class="cite xref">CMU-836068</a>]</span>
-</td>
-            <td class="text-left" rowspan="1" colspan="1">
-              <span>[<a href="#RFC1321" class="cite xref">RFC1321</a>]</span>, <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, this document.</td>
-          </tr>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">sha</td>
-            <td class="text-left" rowspan="1" colspan="1">insecure</td>
-            <td class="text-left" rowspan="1" colspan="1">The SHA-1 algorithm. It is vulnerable to collision attacks; see <span>[<a href="#NO-SHA" class="cite xref">NO-SHA</a>]</span> and <span>[<a href="#IACR-2020-014" class="cite xref">IACR-2020-014</a>]</span>
-</td>
-            <td class="text-left" rowspan="1" colspan="1">
-              <span>[<a href="#RFC3174" class="cite xref">RFC3174</a>]</span>, <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span> this document.</td>
-          </tr>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">unixsum</td>
-            <td class="text-left" rowspan="1" colspan="1">insecure</td>
-            <td class="text-left" rowspan="1" colspan="1">The algorithm used by the UNIX "sum" command.</td>
-            <td class="text-left" rowspan="1" colspan="1">
-              <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span>, <span>[<a href="#UNIX" class="cite xref">UNIX</a>]</span>, this document.</td>
-          </tr>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">unixcksum</td>
-            <td class="text-left" rowspan="1" colspan="1">insecure</td>
-            <td class="text-left" rowspan="1" colspan="1">The algorithm used by the UNIX "cksum" command.</td>
-            <td class="text-left" rowspan="1" colspan="1">
-              <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span>, <span>[<a href="#UNIX" class="cite xref">UNIX</a>]</span>, this document.</td>
-          </tr>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">adler</td>
-            <td class="text-left" rowspan="1" colspan="1">insecure</td>
-            <td class="text-left" rowspan="1" colspan="1">The ADLER32 algorithm.</td>
-            <td class="text-left" rowspan="1" colspan="1">
-              <span>[<a href="#RFC1950" class="cite xref">RFC1950</a>]</span>, this document.</td>
-          </tr>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">crc32c</td>
-            <td class="text-left" rowspan="1" colspan="1">insecure</td>
-            <td class="text-left" rowspan="1" colspan="1">The CRC32c algorithm.</td>
-            <td class="text-left" rowspan="1" colspan="1">
-              <span>[<a href="#RFC9260" class="cite xref">RFC9260</a>]</span> appendix B, this document.</td>
-          </tr>
-        </tbody>
-      </table>
-</div>
+<p id="section-5-9">When reviewing registration requests, the designated expert(s) should pay
+attention to the requested status. The status value should reflect
+standardization status and the broad opinion of relevant interest groups such as
+the IETF or security-related SDOs. The "standard" status is not suitable for an
+algorithm that is known to be weak, broken or experimental. If a registration
+request attempts to register such an algorithm as "standard", the designated
+expert(s) should suggest an alternative status of "insecure" or "provisional".<a href="#section-5-9" class="pilcrow">¶</a></p>
+<p id="section-5-10">When reviewing registration requests, the designated expert(s) cannot use a
+status of "insecure" or "provisional" as grounds for rejection.<a href="#section-5-10" class="pilcrow">¶</a></p>
+<p id="section-5-11">Requests to update or change the fields in an existing registration are
+permitted. For example, this could allow for the transition of an algorithm
+status from "standard" to "insecure" as the security environment evolves.<a href="#section-5-11" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security">
@@ -1932,14 +1885,14 @@ processing of invalid data.<a href="#section-6.4-2" class="pilcrow">¶</a></p>
 the whole payload before sending a message (e.g. see <span>[<a href="#I-D.thomson-http-mice" class="cite xref">I-D.thomson-http-mice</a>]</span>).<a href="#section-6.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="usage-with-encryption">
+<div id="variations-within-content-encoding">
 <section id="section-6.5">
-        <h3 id="name-usage-with-encryption">
-<a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-usage-with-encryption" class="section-name selfRef">Usage with Encryption</a>
+        <h3 id="name-variations-within-content-e">
+<a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-variations-within-content-e" class="section-name selfRef">Variations Within Content Encoding</a>
         </h3>
-<p id="section-6.5-1">The checksum of an encrypted payload can change between different messages
-depending on the encryption algorithm used; in those cases its value could not be used to provide
-a proof of integrity "at rest" unless the whole (e.g. encoded) content is persisted.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
+<p id="section-6.5-1">Content coding mechanisms can support different encoding parameters, meaning that the same input content can produce different outputs. For example, GZIP supports mulitple compression levels. Such encoding parameters are generally not communicated as representation metadata, for instance different compression levels would all use the same "Content-Encoding: gzip" field. Other examples include where encoding relies on nonces or timestamps, such as the aes128gcm content coding defined <span>[<a href="#RFC8188" class="cite xref">RFC8188</a>]</span>.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
+<p id="section-6.5-2">Since it is possible for there to be variation within content coding, the checksum conveyed by the integrity field cannot be used to provide a proof of integrity "at rest"
+unless the whole (e.g. encoded) content is persisted.<a href="#section-6.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-agility">
@@ -1951,26 +1904,17 @@ a proof of integrity "at rest" unless the whole (e.g. encoded) content is persis
 Algorithm Agility (see <span>[<a href="#RFC7696" class="cite xref">RFC7696</a>]</span>) is achieved by providing implementations with flexibility
 to choose hashing algorithms from the IANA Hash Algorithms for HTTP Digest Fields registry; see
 <a href="#establish-hash-algorithm-registry" class="auto internal xref">Section 7.2</a>.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
-<p id="section-6.6-2">The "standard" algorithms listed in this document are suitable for many purposes,
-including adversarial situations where hash functions might need
-to provide resistance to collision, first-preimage and second-preimage attacks.
-Algorithms listed as "insecure" either provide none of these properties,
-or are known to be weak (see <span>[<a href="#NO-MD5" class="cite xref">NO-MD5</a>]</span> and <span>[<a href="#NO-SHA" class="cite xref">NO-SHA</a>]</span>).<a href="#section-6.6-2" class="pilcrow">¶</a></p>
-<p id="section-6.6-3">For adversarial situations, which of the "standard" algorithms are acceptable
-will depend on the level of protection the circumstances demand.
-As there is no negotiation, endpoints that depend on a digest for security
-will be vulnerable to attacks on the weakest algorithm they are willing to accept.<a href="#section-6.6-3" class="pilcrow">¶</a></p>
-<p id="section-6.6-4">Transition from weak algorithms is supported
+<p id="section-6.6-2">Transition from weak algorithms is supported
 by negotiation of hashing algorithm using <code>Want-Content-Digest</code> or <code>Want-Repr-Digest</code> (see <a href="#want-fields" class="auto internal xref">Section 4</a>)
 or by sending multiple digests from which the receiver chooses.
 Endpoints are advised that sending multiple values consumes resources,
-which may be wasted if the receiver ignores them (see <a href="#representation-digest" class="auto internal xref">Section 3</a>).<a href="#section-6.6-4" class="pilcrow">¶</a></p>
-<p id="section-6.6-5">While algorithm agility allows the migration to stronger algorithms
+which may be wasted if the receiver ignores them (see <a href="#representation-digest" class="auto internal xref">Section 3</a>).<a href="#section-6.6-2" class="pilcrow">¶</a></p>
+<p id="section-6.6-3">While algorithm agility allows the migration to stronger algorithms
 it does not prevent the use of weaker algorithms.
-Integrity fields do not provide any mitigiations for downgrade or substitution
+Integrity fields do not provide any mitigations for downgrade or substitution
 attacks (see Section 1 of <span>[<a href="#RFC6211" class="cite xref">RFC6211</a>]</span>) of the hashing algorithm.
 To protect against such attacks, endpoints could restrict their set of supported algorithms
-to stronger ones and protect the fields value by using TLS and/or digital signatures.<a href="#section-6.6-5" class="pilcrow">¶</a></p>
+to stronger ones and protect the fields value by using TLS and/or digital signatures.<a href="#section-6.6-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="resource-exhaustion">
@@ -1998,8 +1942,8 @@ validation of the algorithm types, number of validations, or the size of content
 <p id="section-7.1-1">IANA is asked to update the
 "Hypertext Transfer Protocol (HTTP) Field Name Registry" registry
 (<span>[<a href="#RFC9110" class="cite xref">HTTP</a>]</span>) according to the table below:<a href="#section-7.1-1" class="pilcrow">¶</a></p>
-<table class="center" id="table-2">
-          <caption><a href="#table-2" class="selfRef">Table 2</a></caption>
+<table class="center" id="table-1">
+          <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
 <thead>
             <tr>
               <th class="text-left" rowspan="1" colspan="1">Field Name</th>
@@ -2053,11 +1997,86 @@ validation of the algorithm types, number of validations, or the size of content
         <h3 id="name-establish-the-hash-algorith">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-establish-the-hash-algorith" class="section-name selfRef">Establish the Hash Algorithms for HTTP Digest Fields Registry</a>
         </h3>
-<p id="section-7.2-1">This memo sets this specification to be the establishing document for the
-<a href="https://www.iana.org/assignments/http-structured-dig-alg/">Hash Algorithms for HTTP Digest Fields</a>
-registry defined in <a href="#algorithms" class="auto internal xref">Section 5</a>.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.2-2">IANA is asked to initialize the registry with the entries in
-<a href="#iana-hash-algorithm-table" class="auto internal xref">Table 1</a>.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
+<p id="section-7.2-1">IANA is requested to create the new "Hash Algorithms for HTTP Digest Fields"
+registry at <a href="https://www.iana.org/assignments/http-digest-hash-alg/">https://www.iana.org/assignments/http-digest-hash-alg/</a> and
+populate it with the entries in <a href="#iana-hash-algorithm-table" class="auto internal xref">Table 2</a>. The procedure for
+new registrations is provided in <a href="#algorithms" class="auto internal xref">Section 5</a>.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<span id="name-initial-hash-algorithms"></span><div id="iana-hash-algorithm-table">
+<table class="center" id="table-2">
+          <caption>
+<a href="#table-2" class="selfRef">Table 2</a>:
+<a href="#name-initial-hash-algorithms" class="selfRef">Initial Hash Algorithms</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Algorithm Key</th>
+              <th class="text-left" rowspan="1" colspan="1">Status</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">Reference(s)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">sha-512</td>
+              <td class="text-left" rowspan="1" colspan="1">standard</td>
+              <td class="text-left" rowspan="1" colspan="1">The SHA-512 algorithm.</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span>, <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, this document.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">sha-256</td>
+              <td class="text-left" rowspan="1" colspan="1">standard</td>
+              <td class="text-left" rowspan="1" colspan="1">The SHA-256 algorithm.</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span>, <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, this document.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">md5</td>
+              <td class="text-left" rowspan="1" colspan="1">insecure</td>
+              <td class="text-left" rowspan="1" colspan="1">The MD5 algorithm. It is vulnerable to collision attacks; see <span>[<a href="#NO-MD5" class="cite xref">NO-MD5</a>]</span> and <span>[<a href="#CMU-836068" class="cite xref">CMU-836068</a>]</span>
+</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC1321" class="cite xref">RFC1321</a>]</span>, <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, this document.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">sha</td>
+              <td class="text-left" rowspan="1" colspan="1">insecure</td>
+              <td class="text-left" rowspan="1" colspan="1">The SHA-1 algorithm. It is vulnerable to collision attacks; see <span>[<a href="#NO-SHA" class="cite xref">NO-SHA</a>]</span> and <span>[<a href="#IACR-2020-014" class="cite xref">IACR-2020-014</a>]</span>
+</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC3174" class="cite xref">RFC3174</a>]</span>, <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span> this document.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">unixsum</td>
+              <td class="text-left" rowspan="1" colspan="1">insecure</td>
+              <td class="text-left" rowspan="1" colspan="1">The algorithm used by the UNIX "sum" command.</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span>, <span>[<a href="#UNIX" class="cite xref">UNIX</a>]</span>, this document.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">unixcksum</td>
+              <td class="text-left" rowspan="1" colspan="1">insecure</td>
+              <td class="text-left" rowspan="1" colspan="1">The algorithm used by the UNIX "cksum" command.</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span>, <span>[<a href="#UNIX" class="cite xref">UNIX</a>]</span>, this document.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">adler</td>
+              <td class="text-left" rowspan="1" colspan="1">insecure</td>
+              <td class="text-left" rowspan="1" colspan="1">The ADLER32 algorithm.</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC1950" class="cite xref">RFC1950</a>]</span>, this document.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">crc32c</td>
+              <td class="text-left" rowspan="1" colspan="1">insecure</td>
+              <td class="text-left" rowspan="1" colspan="1">The CRC32c algorithm.</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC9260" class="cite xref">RFC9260</a>]</span> appendix B, this document.</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
 </section>
 </div>
 </section>
@@ -2181,6 +2200,10 @@ registry defined in <a href="#algorithms" class="auto internal xref">Section 5</
 <dt id="RFC7807">[RFC7807]</dt>
         <dd>
 <span class="refAuthor">Nottingham, M.</span> and <span class="refAuthor">E. Wilde</span>, <span class="refTitle">"Problem Details for HTTP APIs"</span>, <span class="seriesInfo">RFC 7807</span>, <span class="seriesInfo">DOI 10.17487/RFC7807</span>, <time datetime="2016-03" class="refDate">March 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7807">https://www.rfc-editor.org/rfc/rfc7807</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8188">[RFC8188]</dt>
+        <dd>
+<span class="refAuthor">Thomson, M.</span>, <span class="refTitle">"Encrypted Content-Encoding for HTTP"</span>, <span class="seriesInfo">RFC 8188</span>, <span class="seriesInfo">DOI 10.17487/RFC8188</span>, <time datetime="2017-06" class="refDate">June 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8188">https://www.rfc-editor.org/rfc/rfc8188</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9260">[RFC9260]</dt>
         <dd>

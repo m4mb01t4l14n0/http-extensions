@@ -82,13 +82,13 @@ Table of Contents
      3.1.  Using Repr-Digest in State-Changing Requests
      3.2.  Repr-Digest and Content-Location in Responses
    4.  Integrity preference fields
-   5.  Hash Algorithms for HTTP Digest Fields Registry
+   5.  Hash Algorithm Considerations and Registration
    6.  Security Considerations
      6.1.  HTTP Messages Are Not Protected In Full
      6.2.  End-to-End Integrity
      6.3.  Usage in Signatures
      6.4.  Usage in Trailer Fields
-     6.5.  Usage with Encryption
+     6.5.  Variations Within Content Encoding
      6.6.  Algorithm Agility
      6.7.  Resource exhaustion
    7.  IANA Considerations
@@ -184,8 +184,8 @@ Table of Contents
       -  Appendix B and Appendix C contain worked examples of Repr-
          Digest and Want-Repr-Digest fields in message exchanges.
 
-   *  Section 5 bootstraps a new IANA registry hash algorithms and
-      defines registration procedures for future entries.
+   *  Section 5 presents hash algorithm considerations and defines
+      registration procedures for future entries.
 
 1.2.  Concept Overview
 
@@ -492,90 +492,80 @@ Table of Contents
    Want-Content-Digest: sha-256=1
    Want-Content-Digest: sha-512=3, sha-256=10, unixsum=0
 
-5.  Hash Algorithms for HTTP Digest Fields Registry
+5.  Hash Algorithm Considerations and Registration
 
-   The "Hash Algorithms for HTTP Digest Fields", maintained by IANA at
-   https://www.iana.org/assignments/http-dig-alg/
-   (https://www.iana.org/assignments/http-dig-alg/), registers
-   algorithms for use with the Integrity and Integrity preference fields
-   defined in this document.
+   There are a wide variety of hashing algorithms that can be used for
+   the purposes of integrity.  The choice of algorithm depends on
+   several factors such as the integrity use case, implementation needs
+   or constraints, or application design and workflows.
 
-   This registry uses the Specification Required policy (Section 4.6 of
-   [RFC8126]).
+   An initial set of algorithms will be registered with IANA in the
+   "Hash Algorithms for HTTP Digest Fields" registry; see Section 7.2.
+   Additional algorithms can be registered in accordance with the
+   policies set out in this section.
 
-   Registrations MUST include the following fields:
+   Each algorithm has a status field, which is intended to provide an
+   aid to implementation selection.
+
+   Algorithms with a status value of "standard" are suitable for many
+   purposes, including adversarial situations where hash functions might
+   need to provide resistance to collision, first-preimage and second-
+   preimage attacks.  For adversarial situations, selecting which of the
+   "standard" algorithms are acceptable will depend on the level of
+   protection the circumstances demand.  As there is no negotiation,
+   endpoints that depend on a digest for security will be vulnerable to
+   attacks on the weakest algorithm they are willing to accept.
+
+   Algorithms with a status value of "insecure" either provide none of
+   these properties, or are known to be weak (see [NO-MD5] and
+   [NO-SHA]).  These algorithms MAY be used to preserve integrity
+   against corruption, but MUST NOT be used in a potentially adversarial
+   setting; for example, when signing Integrity fields' values for
+   authenticity.
+
+   Discussion of algorithm agility is presented in Section 6.6.
+
+   Registration requests for the "Hash Algorithms for HTTP Digest
+   Fields" registry use the Specification Required policy (Section 4.6
+   of [RFC8126]).  Requests should use the following template:
 
    *  Algorithm Key: the Structured Fields key value used in Content-
       Digest, Repr-Digest, Want-Content-Digest, or Want-Repr-Digest
       field Dictionary member keys
 
-   *  Status: the status of the algorithm.  Use "standard" for
-      standardized algorithms without known problems; "experimental" or
-      some other appropriate value
+   *  Status: the status of the algorithm.  The options are:
 
-      -  e.g. according to the type and status of the primary document
-         in which the algorithm is defined; "insecure" when the
-         algorithm is insecure; "reserved" when the algorithm references
-         a reserved token value
+      -  "standard" - for standardized algorithms without known
+         problems,
+
+      -  "provisional" - for non-standard or unproven algorithms,
+
+      -  "insecure" - for insecure algorithms,
+
+      -  "reserved" - for algorithms that use a reserved token value
+         that cannot be expressed in Structured Fields
 
    *  Description: a short description of the algorithm
 
-   *  Reference(s): a set of pointers to the primary documents defining
-      the algorithm and key
+   *  Reference(s): pointer(s) to the primary document(s) defining the
+      technical details of the algorithm, and optionally the key
 
-   Insecure hashing algorithms MAY be used to preserve integrity against
-   corruption, but MUST NOT be used in a potentially adversarial
-   setting; for example, when signing Integrity fields' values for
-   authenticity.
+   When reviewing registration requests, the designated expert(s) should
+   pay attention to the requested status.  The status value should
+   reflect standardization status and the broad opinion of relevant
+   interest groups such as the IETF or security-related SDOs.  The
+   "standard" status is not suitable for an algorithm that is known to
+   be weak, broken or experimental.  If a registration request attempts
+   to register such an algorithm as "standard", the designated expert(s)
+   should suggest an alternative status of "insecure" or "provisional".
 
-   The entries in Table 1 are registered by this document.
+   When reviewing registration requests, the designated expert(s) cannot
+   use a status of "insecure" or "provisional" as grounds for rejection.
 
-   +===========+==========+============================+==============+
-   | Algorithm | Status   | Description                | Reference(s) |
-   | Key       |          |                            |              |
-   +===========+==========+============================+==============+
-   | sha-512   | standard | The SHA-512 algorithm.     | [RFC6234],   |
-   |           |          |                            | [RFC4648],   |
-   |           |          |                            | this         |
-   |           |          |                            | document.    |
-   +-----------+----------+----------------------------+--------------+
-   | sha-256   | standard | The SHA-256 algorithm.     | [RFC6234],   |
-   |           |          |                            | [RFC4648],   |
-   |           |          |                            | this         |
-   |           |          |                            | document.    |
-   +-----------+----------+----------------------------+--------------+
-   | md5       | insecure | The MD5 algorithm.  It is  | [RFC1321],   |
-   |           |          | vulnerable to collision    | [RFC4648],   |
-   |           |          | attacks; see [NO-MD5] and  | this         |
-   |           |          | [CMU-836068]               | document.    |
-   +-----------+----------+----------------------------+--------------+
-   | sha       | insecure | The SHA-1 algorithm.  It   | [RFC3174],   |
-   |           |          | is vulnerable to collision | [RFC4648],   |
-   |           |          | attacks; see [NO-SHA] and  | [RFC6234]    |
-   |           |          | [IACR-2020-014]            | this         |
-   |           |          |                            | document.    |
-   +-----------+----------+----------------------------+--------------+
-   | unixsum   | insecure | The algorithm used by the  | [RFC4648],   |
-   |           |          | UNIX "sum" command.        | [RFC6234],   |
-   |           |          |                            | [UNIX], this |
-   |           |          |                            | document.    |
-   +-----------+----------+----------------------------+--------------+
-   | unixcksum | insecure | The algorithm used by the  | [RFC4648],   |
-   |           |          | UNIX "cksum" command.      | [RFC6234],   |
-   |           |          |                            | [UNIX], this |
-   |           |          |                            | document.    |
-   +-----------+----------+----------------------------+--------------+
-   | adler     | insecure | The ADLER32 algorithm.     | [RFC1950],   |
-   |           |          |                            | this         |
-   |           |          |                            | document.    |
-   +-----------+----------+----------------------------+--------------+
-   | crc32c    | insecure | The CRC32c algorithm.      | [RFC9260]    |
-   |           |          |                            | appendix B,  |
-   |           |          |                            | this         |
-   |           |          |                            | document.    |
-   +-----------+----------+----------------------------+--------------+
-
-                     Table 1: Initial Hash Algorithms
+   Requests to update or change the fields in an existing registration
+   are permitted.  For example, this could allow for the transition of
+   an algorithm status from "standard" to "insecure" as the security
+   environment evolves.
 
 6.  Security Considerations
 
@@ -653,12 +643,21 @@ Table of Contents
    section, some may require to pre-process the whole payload before
    sending a message (e.g. see [I-D.thomson-http-mice]).
 
-6.5.  Usage with Encryption
+6.5.  Variations Within Content Encoding
 
-   The checksum of an encrypted payload can change between different
-   messages depending on the encryption algorithm used; in those cases
-   its value could not be used to provide a proof of integrity "at rest"
-   unless the whole (e.g. encoded) content is persisted.
+   Content coding mechanisms can support different encoding parameters,
+   meaning that the same input content can produce different outputs.
+   For example, GZIP supports mulitple compression levels.  Such
+   encoding parameters are generally not communicated as representation
+   metadata, for instance different compression levels would all use the
+   same "Content-Encoding: gzip" field.  Other examples include where
+   encoding relies on nonces or timestamps, such as the aes128gcm
+   content coding defined [RFC8188].
+
+   Since it is possible for there to be variation within content coding,
+   the checksum conveyed by the integrity field cannot be used to
+   provide a proof of integrity "at rest" unless the whole (e.g.
+   encoded) content is persisted.
 
 6.6.  Algorithm Agility
 
@@ -667,19 +666,6 @@ Table of Contents
    implementations with flexibility to choose hashing algorithms from
    the IANA Hash Algorithms for HTTP Digest Fields registry; see
    Section 7.2.
-
-   The "standard" algorithms listed in this document are suitable for
-   many purposes, including adversarial situations where hash functions
-   might need to provide resistance to collision, first-preimage and
-   second-preimage attacks.  Algorithms listed as "insecure" either
-   provide none of these properties, or are known to be weak (see
-   [NO-MD5] and [NO-SHA]).
-
-   For adversarial situations, which of the "standard" algorithms are
-   acceptable will depend on the level of protection the circumstances
-   demand.  As there is no negotiation, endpoints that depend on a
-   digest for security will be vulnerable to attacks on the weakest
-   algorithm they are willing to accept.
 
    Transition from weak algorithms is supported by negotiation of
    hashing algorithm using Want-Content-Digest or Want-Repr-Digest (see
@@ -690,7 +676,7 @@ Table of Contents
 
    While algorithm agility allows the migration to stronger algorithms
    it does not prevent the use of weaker algorithms.  Integrity fields
-   do not provide any mitigiations for downgrade or substitution attacks
+   do not provide any mitigations for downgrade or substitution attacks
    (see Section 1 of [RFC6211]) of the hashing algorithm.  To protect
    against such attacks, endpoints could restrict their set of supported
    algorithms to stronger ones and protect the fields value by using TLS
@@ -728,16 +714,62 @@ Table of Contents
      |                     |           | this document              |
      +---------------------+-----------+----------------------------+
 
-                                 Table 2
+                                 Table 1
 
 7.2.  Establish the Hash Algorithms for HTTP Digest Fields Registry
 
-   This memo sets this specification to be the establishing document for
-   the Hash Algorithms for HTTP Digest Fields
-   (https://www.iana.org/assignments/http-structured-dig-alg/) registry
-   defined in Section 5.
+   IANA is requested to create the new "Hash Algorithms for HTTP Digest
+   Fields" registry at https://www.iana.org/assignments/http-digest-
+   hash-alg/ (https://www.iana.org/assignments/http-digest-hash-alg/)
+   and populate it with the entries in Table 2.  The procedure for new
+   registrations is provided in Section 5.
 
-   IANA is asked to initialize the registry with the entries in Table 1.
+   +===========+==========+============================+==============+
+   | Algorithm | Status   | Description                | Reference(s) |
+   | Key       |          |                            |              |
+   +===========+==========+============================+==============+
+   | sha-512   | standard | The SHA-512 algorithm.     | [RFC6234],   |
+   |           |          |                            | [RFC4648],   |
+   |           |          |                            | this         |
+   |           |          |                            | document.    |
+   +-----------+----------+----------------------------+--------------+
+   | sha-256   | standard | The SHA-256 algorithm.     | [RFC6234],   |
+   |           |          |                            | [RFC4648],   |
+   |           |          |                            | this         |
+   |           |          |                            | document.    |
+   +-----------+----------+----------------------------+--------------+
+   | md5       | insecure | The MD5 algorithm.  It is  | [RFC1321],   |
+   |           |          | vulnerable to collision    | [RFC4648],   |
+   |           |          | attacks; see [NO-MD5] and  | this         |
+   |           |          | [CMU-836068]               | document.    |
+   +-----------+----------+----------------------------+--------------+
+   | sha       | insecure | The SHA-1 algorithm.  It   | [RFC3174],   |
+   |           |          | is vulnerable to collision | [RFC4648],   |
+   |           |          | attacks; see [NO-SHA] and  | [RFC6234]    |
+   |           |          | [IACR-2020-014]            | this         |
+   |           |          |                            | document.    |
+   +-----------+----------+----------------------------+--------------+
+   | unixsum   | insecure | The algorithm used by the  | [RFC4648],   |
+   |           |          | UNIX "sum" command.        | [RFC6234],   |
+   |           |          |                            | [UNIX], this |
+   |           |          |                            | document.    |
+   +-----------+----------+----------------------------+--------------+
+   | unixcksum | insecure | The algorithm used by the  | [RFC4648],   |
+   |           |          | UNIX "cksum" command.      | [RFC6234],   |
+   |           |          |                            | [UNIX], this |
+   |           |          |                            | document.    |
+   +-----------+----------+----------------------------+--------------+
+   | adler     | insecure | The ADLER32 algorithm.     | [RFC1950],   |
+   |           |          |                            | this         |
+   |           |          |                            | document.    |
+   +-----------+----------+----------------------------+--------------+
+   | crc32c    | insecure | The CRC32c algorithm.      | [RFC9260]    |
+   |           |          |                            | appendix B,  |
+   |           |          |                            | this         |
+   |           |          |                            | document.    |
+   +-----------+----------+----------------------------+--------------+
+
+                     Table 2: Initial Hash Algorithms
 
 8.  References
 
@@ -867,6 +899,10 @@ Table of Contents
    [RFC7807]  Nottingham, M. and E. Wilde, "Problem Details for HTTP
               APIs", RFC 7807, DOI 10.17487/RFC7807, March 2016,
               <https://www.rfc-editor.org/rfc/rfc7807>.
+
+   [RFC8188]  Thomson, M., "Encrypted Content-Encoding for HTTP",
+              RFC 8188, DOI 10.17487/RFC8188, June 2017,
+              <https://www.rfc-editor.org/rfc/rfc8188>.
 
    [RFC9260]  Stewart, R., Tüxen, M., and K. Nielsen, "Stream Control
               Transmission Protocol", RFC 9260, DOI 10.17487/RFC9260,
