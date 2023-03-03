@@ -1528,24 +1528,24 @@ Appendix D.  Sample Digest Values
    algorithm over the input and running the output bytes through Byte
    Sequence serialization; see Section 4.1.8 of [STRUCTURED-FIELDS].
 
-  NOTE: '\' line wrapping per RFC 8792
+   NOTE: '\' line wrapping per RFC 8792
 
-  sha-512 -   :WZDPaVn/7XgHaAy8pmojAkGWoRx2UFChF41A2svX+TaPm+AbwAgBWnrI\
-              iYllu7BNNyealdVLvRwEmTHWXvJwew==:
+   sha-512 -   :WZDPaVn/7XgHaAy8pmojAkGWoRx2UFChF41A2svX+TaPm+\
+               AbwAgBWnrIiYllu7BNNyealdVLvRwEmTHWXvJwew==:
 
-  sha-256 -   :X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=:
+   sha-256 -   :X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=:
 
-  md5 -       :Sd/dVLAcvNLSq16eXua5uQ==:
+   md5 -       :Sd/dVLAcvNLSq16eXua5uQ==:
 
-  sha -       :07CavjDP4u3/TungoUHJO/Wzr4c=:
+   sha -       :07CavjDP4u3/TungoUHJO/Wzr4c=:
 
-  unixsum -   :GQU=:
+   unixsum -   :GQU=:
 
-  unixcksum - :7zsHAA==:
+   unixcksum - :7zsHAA==:
 
-  adler -     :OZkGFw==:
+   adler -     :OZkGFw==:
 
-  crc32c -    :Q3lHIA==:
+   crc32c -    :Q3lHIA==:
 
 Appendix E.  Migrating from RFC 3230
 
