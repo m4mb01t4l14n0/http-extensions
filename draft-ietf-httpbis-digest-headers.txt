@@ -6,7 +6,7 @@ HTTP                                                            R. Polli
 Internet-Draft                         Team Digitale, Italian Government
 Obsoletes: 3230 (if approved)                                  L. Pardue
 Intended status: Standards Track                              Cloudflare
-Expires: 3 September 2023                                   2 March 2023
+Expires: 4 September 2023                                   3 March 2023
 
 
                              Digest Fields
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 September 2023.
+   This Internet-Draft will expire on 4 September 2023.
 
 Copyright Notice
 
@@ -117,7 +117,8 @@ Table of Contents
      C.2.  Server Selects Algorithm Unsupported by Client
      C.3.  Server Does Not Support Client Algorithm and Returns an
            Error
-   Appendix D.  Migrating from RFC 3230
+   Appendix D.  Sample Digest Values
+   Appendix E.  Migrating from RFC 3230
    Acknowledgements
    Code Samples
    Changes
@@ -311,7 +312,8 @@ Table of Contents
       the digest;
 
    *  value is a Byte Sequence (Section 3.3.5 of [STRUCTURED-FIELDS]),
-      that contains the output of the digest calculation.
+      that conveys an encoded version of the byte output produced by the
+      digest calculation.
 
    For example:
 
@@ -371,8 +373,8 @@ Table of Contents
    *  key conveys the hashing algorithm (see Section 5) used to compute
       the digest;
 
-   *  value is a Byte Sequence that contains the output of the digest
-      calculation.
+   *  value is a Byte Sequence, that conveys an encoded version of the
+      byte output produced by the digest calculation.
 
    For example:
 
@@ -906,10 +908,10 @@ Appendix A.  Resource Representation and Representation Data
    Content-Type: application/json
    Content-Encoding: gzip
 
-   0x1F0x8B0x080x000xA50xB40xBD0x620x020xFF\
-   0xAB0x560x4A0x540xB20x520x500x320xA40x03\
-   0x500xAA0x050x000x440x470x2A0x7C0x6D0x00\
-   0x000x00
+   1F 8B 08 00 A5 B4 BD 62 02 FF
+   AB 56 4A 54 B2 52 50 32 A4 03
+   50 AA 05 00 44 47 2A 7C 6D 00
+   00 00
 
           Figure 2: Request containing a gzip-encoded JSON object
 
@@ -917,16 +919,14 @@ Appendix A.  Resource Representation and Representation Data
    content coding means that the content is malformed.  In this case,
    the server can reply with an error.
 
-   NOTE: '\' line wrapping per RFC 8792
-
    PUT /entries/1234 HTTP/1.1
    Host: foo.example
    Content-Type: application/json
 
-   0x1F0x8B0x080x000xA50xB40xBD0x620x020xFF\
-   0xAB0x560x4A0x540xB20x520x500x320xA40x03\
-   0x500xAA0x050x000x440x470x2A0x7C0x6D0x00\
-   0x000x00
+   1F 8B 08 00 A5 B4 BD 62 02 FF
+   AB 56 4A 54 B2 52 50 32 A4 03
+   50 AA 05 00 44 47 2A 7C 6D 00
+   00 00
 
                 Figure 3: Request containing malformed JSON
 
@@ -948,7 +948,7 @@ Appendix A.  Resource Representation and Representation Data
    Content-Type: application/json
    Content-Range: bytes 0-10/32
 
-   0x1F0x8B0x080x000xA50xB40xBD0x620x020xFF
+   1F 8B 08 00 A5 B4 BD 62 02 FF
 
        Figure 6: Partial response from a gzip-encoded representation
 
@@ -1143,9 +1143,9 @@ B.4.  Client and Server Provide Full Representation Data
    Repr-Digest: \
      sha-256=:4REjxQ4yrqUVicfSKYNO/cF9zNj5ANbzgDZt3/h3Qxo=:
 
-   0x8B0x080x800x7B0x220x680x650x6C0x6C0x6F\
-   0x220x3A0x200x220x770x6F0x720x6C0x640x22\
-   0x7D0x03
+   8B 08 80 7B 22 68 65 6C 6C 6F
+   22 3A 20 22 77 6F 72 6C 64 22
+   7D 03
 
             Figure 18: Response with Digest of encoded response
 
@@ -1210,9 +1210,9 @@ B.6.  Client and Server Provide Full Representation Data
      sha-512=:pxo7aYzcGI88pnDnoSmAnaOEVys0MABhgvHY9+VI+ElE60jBCwnMPyA/\
      s3NF3ZO5oIWA7lf8ukk+5KJzm3p5og==:
 
-   0x8B0x080x800x7B0x220x680x650x6C0x6C0x6F\
-   0x220x3A0x200x220x770x6F0x720x6C0x640x22\
-   0x7D0x03
+   8B 08 80 7B 22 68 65 6C 6C 6F
+   22 3A 20 22 77 6F 72 6C 64 22
+   7D 03
 
              Figure 21: Response with Digest of Encoded Content
 
@@ -1484,7 +1484,34 @@ C.3.  Server Does Not Support Client Algorithm and Returns an Error
 
           Figure 36: Response advertising the supported algorithms
 
-Appendix D.  Migrating from RFC 3230
+Appendix D.  Sample Digest Values
+
+   This section shows examples of digest values for different hashing
+   algorithms.  The input value is the JSON object {"hello": "world"}.
+   The digest values are each produced by running the relevant hashing
+   algorithm over the input and running the output bytes through Byte
+   Sequence serialization; see Section 4.1.8 of [STRUCTURED-FIELDS].
+
+  NOTE: '\' line wrapping per RFC 8792
+
+  sha-512 -   :WZDPaVn/7XgHaAy8pmojAkGWoRx2UFChF41A2svX+TaPm+AbwAgBWnrI\
+              iYllu7BNNyealdVLvRwEmTHWXvJwew==:
+
+  sha-256 -   :X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=:
+
+  md5 -       :Sd/dVLAcvNLSq16eXua5uQ==:
+
+  sha -       :07CavjDP4u3/TungoUHJO/Wzr4c=:
+
+  unixsum -   :GQU=:
+
+  unixcksum - :7zsHAA==:
+
+  adler -     :OZkGFw==:
+
+  crc32c -    :Q3lHIA==:
+
+Appendix E.  Migrating from RFC 3230
 
    HTTP digests are computed by applying a hashing algorithm to input
    data.  RFC 3230 defined the input data as an "instance", a term it
@@ -1506,6 +1533,12 @@ Appendix D.  Migrating from RFC 3230
 
    RFC 3230 could never communicate the digest of HTTP message content
    in the Digest field; Content-Digest now provides that capability.
+
+   RFC 3230 allowed algorithms to define their output encoding format
+   for use with the Digest field.  This resulted in a mixed of formats
+   such as base64, hex or decimal.  By virtue of using Structured
+   fields, Content-Digest and Repr-Digest use only a single encoding
+   format.  Further explanation and examples are provided in Appendix D.
 
 Acknowledgements
 
