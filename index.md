@@ -92,3 +92,21 @@ View [saved issues](issues.html), or the latest GitHub [issues](https://github.c
 | [HTTP Unprompted Authentication](sign-signature/draft-ietf-httpbis-unprompted-auth.html "HTTP Unprompted Authentication (HTML)") | [plain text](sign-signature/draft-ietf-httpbis-unprompted-auth.txt "HTTP Unprompted Authentication (Text)") | same as main |
 | [Retrofit Structured Fields](sign-signature/draft-ietf-httpbis-retrofit.html "Retrofit Structured Fields for HTTP (HTML)") | [plain text](sign-signature/draft-ietf-httpbis-retrofit.txt "Retrofit Structured Fields for HTTP (Text)") | same as main |
 
+## Preview for branch [rewrap-again](rewrap-again)
+
+| Draft |     |     |     |
+| ----- | --- | --- | --- |
+| [HTTP Message Signatures](rewrap-again/draft-ietf-httpbis-message-signatures.html "HTTP Message Signatures (HTML)") | [plain text](rewrap-again/draft-ietf-httpbis-message-signatures.txt "HTTP Message Signatures (Text)") | same as main |
+| [Cookies: HTTP State Management Mechanism](rewrap-again/draft-ietf-httpbis-rfc6265bis.html "Cookies: HTTP State Management Mechanism (HTML)") | [plain text](rewrap-again/draft-ietf-httpbis-rfc6265bis.txt "Cookies: HTTP State Management Mechanism (Text)") | same as main |
+| [The HTTP QUERY Method](rewrap-again/draft-ietf-httpbis-safe-method-w-body.html "The HTTP QUERY Method (HTML)") | [plain text](rewrap-again/draft-ietf-httpbis-safe-method-w-body.txt "The HTTP QUERY Method (Text)") | same as main |
+| [Client-Cert Header](rewrap-again/draft-ietf-httpbis-client-cert-field.html "Client-Cert HTTP Header Field (HTML)") | [plain text](rewrap-again/draft-ietf-httpbis-client-cert-field.txt "Client-Cert HTTP Header Field (Text)") | same as main |
+| [ORIGIN in HTTP/3](rewrap-again/draft-ietf-httpbis-origin-h3.html "The ORIGIN Extension in HTTP/3 (HTML)") | [plain text](rewrap-again/draft-ietf-httpbis-origin-h3.txt "The ORIGIN Extension in HTTP/3 (Text)") | same as main |
+| [DNS Aliases Proxy-Status](rewrap-again/draft-ietf-httpbis-alias-proxy-status.html "HTTP Proxy-Status Parameter for Next-Hop Aliases (HTML)") | [plain text](rewrap-again/draft-ietf-httpbis-alias-proxy-status.txt "HTTP Proxy-Status Parameter for Next-Hop Aliases (Text)") | same as main |
+| [Resumable Uploads](rewrap-again/draft-ietf-httpbis-resumable-upload.html "Resumable Uploads for HTTP (HTML)") | [plain text](rewrap-again/draft-ietf-httpbis-resumable-upload.txt "Resumable Uploads for HTTP (Text)") | same as main |
+| [Structured Field Values for HTTP](rewrap-again/draft-ietf-httpbis-sfbis.html "Structured Field Values for HTTP (HTML)") | [plain text](rewrap-again/draft-ietf-httpbis-sfbis.txt "Structured Field Values for HTTP (Text)") | same as main |
+| [Digest Fields](rewrap-again/draft-ietf-httpbis-digest-headers.html "Digest Fields (HTML)") | [plain text](rewrap-again/draft-ietf-httpbis-digest-headers.txt "Digest Fields (Text)") | [diff with main](https://www.ietf.org/rfcdiff?url1=https://httpwg.github.io/http-extensions/draft-ietf-httpbis-digest-headers.txt&url2=https://httpwg.github.io/http-extensions/rewrap-again/draft-ietf-httpbis-digest-headers.txt) |
+| [HTTP Representation Variants](rewrap-again/draft-ietf-httpbis-variants.html "HTTP Representation Variants (HTML)") | [plain text](rewrap-again/draft-ietf-httpbis-variants.txt "HTTP Representation Variants (Text)") | same as main |
+| [HTTP Alternative Services](rewrap-again/draft-ietf-httpbis-rfc7838bis.html "HTTP Alternative Services (HTML)") | [plain text](rewrap-again/draft-ietf-httpbis-rfc7838bis.txt "HTTP Alternative Services (Text)") | same as main |
+| [HTTP Unprompted Authentication](rewrap-again/draft-ietf-httpbis-unprompted-auth.html "HTTP Unprompted Authentication (HTML)") | [plain text](rewrap-again/draft-ietf-httpbis-unprompted-auth.txt "HTTP Unprompted Authentication (Text)") | same as main |
+| [Retrofit Structured Fields](rewrap-again/draft-ietf-httpbis-retrofit.html "Retrofit Structured Fields for HTTP (HTML)") | [plain text](rewrap-again/draft-ietf-httpbis-retrofit.txt "Retrofit Structured Fields for HTTP (Text)") | same as main |
+
