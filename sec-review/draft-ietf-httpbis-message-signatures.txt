@@ -5,10 +5,10 @@
 HTTP                                                     A. Backman, Ed.
 Internet-Draft                                                    Amazon
 Intended status: Standards Track                          J. Richer, Ed.
-Expires: 2 September 2023                            Bespoke Engineering
+Expires: 4 September 2023                            Bespoke Engineering
                                                                M. Sporny
                                                           Digital Bazaar
-                                                            1 March 2023
+                                                            3 March 2023
 
 
                         HTTP Message Signatures
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 September 2023.
+   This Internet-Draft will expire on 4 September 2023.
 
 Copyright Notice
 
@@ -152,7 +152,6 @@ Table of Contents
        7.3.4.  Key Specification Mix-Up
        7.3.5.  Non-deterministic Signature Primitives
        7.3.6.  Key and Algorithm Specification Downgrades
-       7.3.7.  Signing Signature Values
      7.4.  Matching Covered Components to Message
        7.4.1.  Modification of Required Message Parameters
        7.4.2.  Mismatch of Signature Parameters from Message
@@ -208,44 +207,62 @@ Table of Contents
    client is behind a TLS Inspection appliance).  In such cases, TLS
    cannot guarantee end-to-end message integrity or authenticity between
    the client and application.  Additionally, some operating
-   environments present obstacles that make it impractical to use TLS,
-   or to use features necessary to provide message authenticity.
-   Furthermore, some applications require the binding of an application-
-   level key to the HTTP message, separate from any TLS certificates in
-   use.  Consequently, while TLS can meet message integrity and
+   environments present obstacles that make it impractical to use TLS
+   (such as presentation of client certificates from a browser), or to
+   use features necessary to provide message authenticity.  Furthermore,
+   some applications require the binding of a higher-level application-
+   specific key to the HTTP message, separate from any TLS certificates
+   in use.  Consequently, while TLS can meet message integrity and
    authenticity needs for many HTTP-based applications, it is not a
    universal solution.
 
+   Additionally, many applications need to be able to generate and
+   verify signatures despite incomplete knowledge of the HTTP message as
+   seen on the wire, due to the use of libraries, proxies, or
+   application frameworks that alter or hide portions of the message
+   from the application at the time of signing or verification.  These
+   applications need a means to protect the parts of the message that
+   are most relevant to the application without having to violate
+   layering and abstraction.
+
+   Finally, object-based signature mechanisms such as [JWS] require the
+   intact conveyance of the exact information that was signed.  When
+   applying such technologies to an HTTP message, elements of the HTTP
+   message need to be duplicated in the object payload either directly
+   or through inclusion of a hash.  This practice introduces complexity
+   since the repeated information needs to be carefully checked for
+   consistency when the signature is verified.
+
    This document defines a mechanism for providing end-to-end integrity
-   and authenticity for components of an HTTP message.  The mechanism
-   allows applications to create digital signatures or message
-   authentication codes (MACs) over only the components of the message
-   that are meaningful and appropriate for the application.  Strict
-   canonicalization rules ensure that the verifier can verify the
-   signature even if the message has been transformed in any of the many
-   ways permitted by HTTP.
+   and authenticity for components of an HTTP message by use of a
+   detached signature.  The mechanism allows applications to create
+   digital signatures or message authentication codes (MACs) over only
+   the components of the message that are meaningful and appropriate for
+   the application.  Strict canonicalization rules ensure that the
+   verifier can verify the signature even if the message has been
+   transformed in any of the many ways permitted by HTTP.
 
    The signing mechanism described in this document consists of three
    parts:
 
    *  A common nomenclature and canonicalization rule set for the
       different protocol elements and other components of HTTP messages,
-      used to create the signature base.
+      used to create the signature base.  (Section 2)
 
    *  Algorithms for generating and verifying signatures over HTTP
       message components using this signature base through application
-      of cryptographic primitives.
+      of cryptographic primitives.  (Section 3)
 
    *  A mechanism for attaching a signature and related metadata to an
       HTTP message, and for parsing attached signatures and metadata
       from HTTP messages.  To facilitate this, this document defines the
-      "Signature-Input" and "Signature" fields.
+      "Signature-Input" and "Signature" fields.  (Section 4)
 
    This document also provides a mechanism for negotiation the use of
    signatures in one or more subsequent messages via the "Accept-
-   Signature" field.  This optional negotiation mechanism can be used
-   along with opportunistic or application-driven message signatures by
-   either party.
+   Signature" field (Section 5).  This optional negotiation mechanism
+   can be used along with opportunistic or application-driven message
+   signatures by either party.
 
 1.1.  Conventions and Terminology
 
@@ -509,8 +526,8 @@ Table of Contents
       some pre-configured algorithm agreed upon by the signer and
       verifier.
 
-   *  A means of determining that a given key and algorithm presented in
-      the request are appropriate for the request being made.  For
+   *  A means of determining that a given key and algorithm used for a
+      signature are appropriate for the context of the message.  For
       example, a server expecting only ECDSA signatures should know to
       reject any RSA signatures, or a server expecting asymmetric
       cryptography should know to reject any symmetric cryptography.
@@ -579,16 +596,17 @@ Table of Contents
 
    Within a single list of covered components, each component identifier
    MUST occur only once.  One component identifier is distinct from
-   another if either the component name or its parameters differ.
-   Multiple component identifiers having the same component name MAY be
-   included if they have parameters that make them distinct.  The order
-   of parameters MUST be preserved when processing a component
+   another if the component name differs, or if any of the parameters
+   differ for the same component name.  Multiple component identifiers
+   having the same component name MAY be included if they have
+   parameters that make them distinct, such as "foo";bar and "foo";baz.
+   The order of parameters MUST be preserved when processing a component
    identifier (such as when parsing during verification), but the order
    of parameters is not significant when comparing two component
-   identifiers for equality.  That is to say, "foo";bar;baz cannot be in
-   the same message as "foo";baz;bar, since these two component
-   identifiers are equivalent, but a system processing one form is not
-   allowed to transform it into the other form.
+   identifiers for equality checks.  That is to say, "foo";bar;baz
+   cannot be in the same message as "foo";baz;bar, since these two
+   component identifiers are equivalent, but a system processing one
+   form is not allowed to transform it into the other form.
 
    The component value associated with a component identifier is defined
    by the identifier itself.  Component values MUST NOT contain newline
@@ -628,7 +646,7 @@ Table of Contents
    are allowed to combine values of HTTP fields with any amount of
    whitespace between the commas, and if this behavior is not accounted
    for by the verifier, the signature can fail since the signer and
-   verifier will be see a different component value in their respective
+   verifier will see a different component value in their respective
    signature bases.  For robustness, it is RECOMMENDED that signed
    messages include only a single instance of any field covered under
    the signature, particularly with the value for any list-based fields
@@ -1472,14 +1490,14 @@ Table of Contents
      aPm+AbwAgBWnrIiYllu7BNNyealdVLvRwEmTHWXvJwew==:
    Content-Length: 18
    Signature-Input: sig1=("@method" "@authority" "@path" \
-     "content-digest" "content-type" "content-length")\
+     "content-digest" "content-length" "content-type")\
      ;created=1618884475;keyid="test-key-rsa-pss"
-   Signature: sig1=:jy4OdKs6DfD7qkBy1G5ZIas30VDSFwL6HkuvNUeQNgIQLDUe3h\
-     ZDtju7+7UaMx0DAklmXFEqMBEfSZodrN7BZAjuKemxhDlC5pvTkdq227QtfsJjuOU\
-     aGAIVaW66/iis7JDfmQSOpbJlqURMBicdNGRf6yCDX7bE5sR5fP7mWvgk8P+SJfyV\
-     43Yvo63rD7QY3RV/EXysMFz3WuaqyRzEyZBv+rvkPUha5cjOEy/sgKvtxehvT4LZj\
-     mEN2qAkC18HRXgIjWbTCyscfV/G6A0WPzHFiX/nTNoWYpJ7cRxtz+t8bqcNgksdi0\
-     0ynArFxonWLzLwl3ok00se9JaZR82WPw==:
+   Signature:  sig1=:LAH8BjcfcOcLojiuOBFWn0P5keD3xAOuJRGziCLuD8r5MW9S0\
+     RoXXLzLSRfGY/3SF8kVIkHjE13SEFdTo4Af/fJ/Pu9wheqoLVdwXyY/UkBIS1M8Br\
+     c8IODsn5DFIrG0IrburbLi0uCc+E2ZIIb6HbUJ+o+jP58JelMTe0QE3IpWINTEzpx\
+     jqDf5/Df+InHCAkQCTuKsamjWXUpyOT1Wkxi7YPVNOjW4MfNuTZ9HdbD2Tr65+BXe\
+     TG9ZS/9SWuXAc+BZ8WyPz0QRz//ec3uWXd7bYYODSjRAxHqX+S1ag3LZElYyUKaAI\
+     jZ8MGOt4gXEwCSLDv/zqxZeWLj/PDkn6w==:
 
    {"hello": "world"}
 
@@ -1494,30 +1512,26 @@ Table of Contents
 
    To cryptographically link the response to the request, the server
    signs the response with its own key and includes the method,
-   authority, and the signature and signature input labeled sig1 from
-   the request in the covered components of the response.  The signature
-   base for this example is:
+   authority, and the signature value sig1 from the request in the
+   covered components of the response.  The signature base for this
+   example is:
 
    NOTE: '\' line wrapping per RFC 8792
 
    "@status": 503
    "content-length": 62
    "content-type": application/json
-   "signature";req;key="sig1": :jy4OdKs6DfD7qkBy1G5ZIas30VDSFwL6HkuvNU\
-     eQNgIQLDUe3hZDtju7+7UaMx0DAklmXFEqMBEfSZodrN7BZAjuKemxhDlC5pvTkdq\
-     227QtfsJjuOUaGAIVaW66/iis7JDfmQSOpbJlqURMBicdNGRf6yCDX7bE5sR5fP7m\
-     Wvgk8P+SJfyV43Yvo63rD7QY3RV/EXysMFz3WuaqyRzEyZBv+rvkPUha5cjOEy/sg\
-     KvtxehvT4LZjmEN2qAkC18HRXgIjWbTCyscfV/G6A0WPzHFiX/nTNoWYpJ7cRxtz+\
-     t8bqcNgksdi00ynArFxonWLzLwl3ok00se9JaZR82WPw==:
-   "signature-input";req;key="sig1": ("@method" "@authority" "@path" \
-     "content-digest" "content-type" "content-length")\
-     ;created=1618884475;keyid="test-key-rsa-pss"
-   "@authority";req: origin.host.internal.example
+   "signature";req;key="sig1": :LAH8BjcfcOcLojiuOBFWn0P5keD3xAOuJRGziC\
+     LuD8r5MW9S0RoXXLzLSRfGY/3SF8kVIkHjE13SEFdTo4Af/fJ/Pu9wheqoLVdwXyY\
+     /UkBIS1M8Brc8IODsn5DFIrG0IrburbLi0uCc+E2ZIIb6HbUJ+o+jP58JelMTe0QE\
+     3IpWINTEzpxjqDf5/Df+InHCAkQCTuKsamjWXUpyOT1Wkxi7YPVNOjW4MfNuTZ9Hd\
+     bD2Tr65+BXeTG9ZS/9SWuXAc+BZ8WyPz0QRz//ec3uWXd7bYYODSjRAxHqX+S1ag3\
+     LZElYyUKaAIjZ8MGOt4gXEwCSLDv/zqxZeWLj/PDkn6w==:
+   "@authority";req: example.com
    "@method";req: POST
    "@signature-params": ("@status" "content-length" "content-type" \
-     "signature";req;key="sig1" "signature-input";req;key="sig1" \
-     "@authority";req "@method";req);created=1618884479\
-     ;keyid="test-key-ecc-p256"
+     "signature";req;key="sig1" "@authority";req "@method";req)\
+     ;created=1618884479;keyid="test-key-ecc-p256"
 
    The signed response message is:
 
@@ -1528,23 +1542,17 @@ Table of Contents
    Content-Type: application/json
    Content-Length: 62
    Signature-Input: reqres=("@status" "content-length" "content-type" \
-     "signature";req;key="sig1" "signature-input";req;key="sig1" \
-     "@authority";req "@method";req);created=1618884479\
-     ;keyid="test-key-ecc-p256"
-   Signature: reqres=:vdftwlSGcKp/R+8/CjDZiQWhAskflyLsom7P4rF71GMsTBvj\
-     7FgV/3XGtGwPd+rlEhQtpa3+x68tWudBfdtYPw==:
+     "signature";req;key="sig1" "@authority";req "@method";req)\
+     ;created=1618884479;keyid="test-key-ecc-p256"
+   Signature: reqres=:mh17P4TbYYBmBwsXPT4nsyVzW4Rp9Fb8WcvnfqKCQLoMvzOB\
+     LD/n32tL/GPW6XE5GAS5bdsg1khK6lBzV1Cx/Q==:
 
    {"busy": true, "message": "Your call is very important to us"}
 
-   Since the signature component values from the request are not
-   repeated in the response, the requester MUST keep the original
-   message component values around long enough to validate the signature
-   of the response that uses this component identifier.  In most cases,
-   this means the requester needs to keep the original request message
-   around, since the signer could choose to include any portions of the
-   request in its response, according to the needs of the application.
-   Signing the signature value of the request alone does not provide
-   sufficient coverage in most cases, as discussed in Section 7.3.7.
+   Since the request's signature value itself is not repeated in the
+   response, the requester MUST keep the original signature value around
+   long enough to validate the signature of the response that uses this
+   component identifier.
 
    Note that the ECDSA algorithm in use here is non-deterministic,
    meaning a different signature value will be created every time the
@@ -1601,17 +1609,21 @@ Table of Contents
    2.  For each message component item in the covered components set (in
        order):
 
-       1.  Append the component identifier for the covered component
+       1.  Check that the component identifier (including its
+           parameters) has not already been added to the signature base.
+           If this happens, produce an error.
+
+       2.  Append the component identifier for the covered component
            serialized according to the component-identifier ABNF rule.
            Note that this serialization places the component name in
            double quotes and appends any parameters outside of the
            quotes.
 
-       2.  Append a single colon :
+       3.  Append a single colon :
 
-       3.  Append a single space " "
+       4.  Append a single space " "
 
-       4.  Determine the component value for the component identifier.
+       5.  Determine the component value for the component identifier.
 
            *  If the component identifier has a parameter that is not
               understood, produce an error.
@@ -1642,9 +1654,9 @@ Table of Contents
               the message, or the value cannot be obtained in the
               context, produce an error.
 
-       5.  Append the covered component's canonicalized component value.
+       6.  Append the covered component's canonicalized component value.
 
-       6.  Append a single newline \n
+       7.  Append a single newline \n
 
    3.  Append the signature parameters component (Section 2.3) according
        to the signature-params-line rule as follows:
@@ -2356,8 +2368,8 @@ Table of Contents
    Signature-Input: sig1=("@method" "@authority" "@path" \
      "content-digest" "content-type" "content-length")\
      ;created=1618884475;keyid="test-key-ecc-p256"
-   Signature: sig1=:e7vqNlt7NV8mJXXja35MQRW/puA3JOHCsKiAG5U7lnpwaqMqn6\
-     83Cna7hyXF4rnpyACdJcOWFB3FSPVymw0fzA==:
+   Signature: sig1=:hNojB+wWw4A7SYF3qK1S01Y4UP5i2JZFYa2WOlMB4Np5iWmJSO\
+     0bDe2hrYRbcIWqVAFjuuCBRsB7lYQJkzbb6g==:
 
    {"hello": "world"}
 
@@ -2378,8 +2390,8 @@ Table of Contents
    Signature-Input: sig1=("@method" "@authority" "@path" \
      "content-digest" "content-type" "content-length")\
      ;created=1618884475;keyid="test-key-ecc-p256"
-   Signature: sig1=:e7vqNlt7NV8mJXXja35MQRW/puA3JOHCsKiAG5U7lnpwaqMqn6\
-     83Cna7hyXF4rnpyACdJcOWFB3FSPVymw0fzA==:
+   Signature: sig1=:hNojB+wWw4A7SYF3qK1S01Y4UP5i2JZFYa2WOlMB4Np5iWmJSO\
+     0bDe2hrYRbcIWqVAFjuuCBRsB7lYQJkzbb6g==:
 
    {"hello": "world"}
 
@@ -2393,48 +2405,39 @@ Table of Contents
    proxy adds its own signature over the new message before passing it
    along.  The proxy includes the new @authority derived component and
    the Forwarded header, which it added to the message.  The proxy's
-   signature also includes the client's signature value and signature
-   input from the original message in its covered components, as
-   dictionary field members under the label sig1.  The proxy can also
-   sign any unchanged components from the original message, such as the
-   @method, @path, and @query in this example, even if those components
-   were covered by the original signature.  See the discussion in
-   Section 7.3.7 for more information about signing signature values.
-
-   While the origin server may not be able to directly verify this
-   original signature, it can verify that the proxy has vouched for the
-   signature's validity.  The proxy identifies its own key and algorithm
-   and, in this example, includes an expiration for the signature to
-   indicate to downstream systems that the proxy will not vouch for this
-   signed message past this short time window.  This results in a
-   signature base of:
+   signature also includes the client's signature value from the
+   original message in its covered components, as a dictionary field
+   member under the label sig1.  Note that since the client's signature
+   already covers the client's Signature-Input value for sig1, this
+   value is transitively covered by the proxy's signature and need not
+   be added explicitly.  While the origin server may not be able to
+   directly verify this original signature, it can verify that the proxy
+   has vouched for the signature's validity.  The proxy identifies its
+   own key and algorithm and, in this example, includes an expiration
+   for the signature to indicate to downstream systems that the proxy
+   will not vouch for this signed message past this short time window.
+   This results in a signature base of:
 
    NOTE: '\' line wrapping per RFC 8792
 
-   "signature";key="sig1": :e7vqNlt7NV8mJXXja35MQRW/puA3JOHCsKiAG5U7ln\
-     pwaqMqn683Cna7hyXF4rnpyACdJcOWFB3FSPVymw0fzA==:
-   "signature-input";key="sig1": ("@method" "@authority" "@path" \
-     "content-digest" "content-type" "content-length")\
-     ;created=1618884475;keyid="test-key-ecc-p256"
+   "signature";key="sig1": :hNojB+wWw4A7SYF3qK1S01Y4UP5i2JZFYa2WOlMB4N\
+     p5iWmJSO0bDe2hrYRbcIWqVAFjuuCBRsB7lYQJkzbb6g==:
    "@authority": origin.host.internal.example
-   "@method": POST
-   "@path": /foo
    "forwarded": for=192.0.2.123
-   "@signature-params": ("signature";key="sig1" "signature-input"\
-     ;key="sig1" "@authority" "@method" "@path" "forwarded")\
-     ;created=1618884480;keyid="test-key-rsa";alg="rsa-v1_5-sha256"\
-     ;expires=1618884540
+   "@signature-params": ("signature";key="sig1" "@authority" \
+     "forwarded");created=1618884480;keyid="test-key-rsa"\
+     ;alg="rsa-v1_5-sha256";expires=1618884540
 
    And a signature output value of:
 
    NOTE: '\' line wrapping per RFC 8792
 
-   V++11u29ZWM1EbQfEx35tnzJVZr8kcoTeuuSCKkdU5J8xr+lb1Ofz7KuvxxZAkMtTZa\
-   4uCdZNxRI+JInYxgc3wUq3duvaugtjmYRe7odUHrEmWKX7m1OwR/Q8JoOxSSPcAdtV1\
-   knAHXtFCFMdnY3JT8qfnH2yi1VNy65XWCXw4eeK+yxtoE3DfhtIyzZbmjhcFfXSmibY\
-   yJQgIMqagEY/wEsVA2gV+5AE7xFdUrInSGVNVcw86w9J/stKYC+Deyl3qAzE4qgBN+9\
-   VgkuLnUkk6U4W8vk7lSgaq27zUzO9cduybFtRaE9MBWGaGKEk3Bi+BdIMF06qEjMCnQ\
-   S+8debQ==
+   YvYVO11F+Q+N4WZNeBdjFKluswwE3vQ4cTXpBwEiMz2hwu0J+wSJLRhHlIZ1N83epfn\
+   KDxY9cbNaVlbtr2UOLkw5O5Q5M5yrjx3s1mgDOsV7fuItD6iDyNISCiKRuevl+M+TyY\
+   Bo10ubG83As5CeeoUdmrtI4G6QX7RqEeX0Xj/CYofHljr/dVzARxskjHEQbTztYVg4W\
+   D+LWo1zjx9w5fw26tsOMagfXLpDb4zb4/lgpgyNKoXFwG7c89KId5q+0BC+kryWuA35\
+   ZcQGaRPAz/NqzeKq/c7p7b/fmHS71fy1jOaFgWFmD+Z77bJLO8AVKuF0y2fpL3KUYHy\
+   ITQHOsA==
 
    These values are added to the HTTP request message by the proxy.  The
    original signature is included under the identifier sig1, and the
@@ -2457,29 +2460,25 @@ Table of Contents
    Signature-Input: sig1=("@method" "@authority" "@path" \
        "content-digest" "content-type" "content-length")\
        ;created=1618884475;keyid="test-key-ecc-p256", \
-     proxy_sig=("signature";key="sig1" "signature-input";key="sig1" \
-       "@authority" "@method" "@path" "forwarded");created=1618884480\
-       ;keyid="test-key-rsa";alg="rsa-v1_5-sha256";expires=1618884540
-   Signature: sig1=:e7vqNlt7NV8mJXXja35MQRW/puA3JOHCsKiAG5U7lnpwaqMqn6\
-       83Cna7hyXF4rnpyACdJcOWFB3FSPVymw0fzA==:, \
-     proxy_sig=:V++11u29ZWM1EbQfEx35tnzJVZr8kcoTeuuSCKkdU5J8xr+lb1Ofz7\
-       KuvxxZAkMtTZa4uCdZNxRI+JInYxgc3wUq3duvaugtjmYRe7odUHrEmWKX7m1Ow\
-       R/Q8JoOxSSPcAdtV1knAHXtFCFMdnY3JT8qfnH2yi1VNy65XWCXw4eeK+yxtoE3\
-       DfhtIyzZbmjhcFfXSmibYyJQgIMqagEY/wEsVA2gV+5AE7xFdUrInSGVNVcw86w\
-       9J/stKYC+Deyl3qAzE4qgBN+9VgkuLnUkk6U4W8vk7lSgaq27zUzO9cduybFtRa\
-       E9MBWGaGKEk3Bi+BdIMF06qEjMCnQS+8debQ==:
+     proxy_sig=("signature";key="sig1" "@authority" "forwarded")\
+       ;created=1618884480;keyid="test-key-rsa";alg="rsa-v1_5-sha256"\
+       ;expires=1618884540
+   Signature: sig1=:hNojB+wWw4A7SYF3qK1S01Y4UP5i2JZFYa2WOlMB4Np5iWmJSO\
+       0bDe2hrYRbcIWqVAFjuuCBRsB7lYQJkzbb6g==:, \
+     proxy_sig=:YvYVO11F+Q+N4WZNeBdjFKluswwE3vQ4cTXpBwEiMz2hwu0J+wSJLR\
+       hHlIZ1N83epfnKDxY9cbNaVlbtr2UOLkw5O5Q5M5yrjx3s1mgDOsV7fuItD6iDy\
+       NISCiKRuevl+M+TyYBo10ubG83As5CeeoUdmrtI4G6QX7RqEeX0Xj/CYofHljr/\
+       dVzARxskjHEQbTztYVg4WD+LWo1zjx9w5fw26tsOMagfXLpDb4zb4/lgpgyNKoX\
+       FwG7c89KId5q+0BC+kryWuA35ZcQGaRPAz/NqzeKq/c7p7b/fmHS71fy1jOaFgW\
+       FmD+Z77bJLO8AVKuF0y2fpL3KUYHyITQHOsA==:
 
    {"hello": "world"}
 
    The proxy's signature and the client's original signature can be
    verified independently for the same message, based on the needs of
-   the application and the capabilities of the verifier to access the
-   specific message.  Since the proxy's signature covers the client
+   the application.  Since the proxy's signature covers the client
    signature, the backend service fronted by the proxy can trust that
-   the proxy has validated the incoming signature in that context.
-   Since the proxy's signature also covers additional components of the
-   second message, the origin server can verify those values itself as
-   well.
+   the proxy has validated the incoming signature.
 
 5.  Requesting Signatures
 
@@ -3405,73 +3404,6 @@ Table of Contents
    algorithm specification instead, preventing an attacker from
    substituting the algorithm specified.
 
-7.3.7.  Signing Signature Values
-
-   When applying request-response binding (Section 2.4) or multiple
-   signatures (Section 4.3) to a message, it is possible to sign the
-   value of an existing Signature field, thereby covering the bytes of
-   the existing signature output in the new signature's value.  While it
-   would seem that this practice would transitively cover the components
-   under the original signature in a verifiable fashion, the attacks
-   described in [JACKSON2019] can be used to impersonate a signature
-   output value on an unrelated message.
-
-   In this example, Alice intends to send a signed request to Bob, and
-   Bob wants to provide a signed response to Alice that includes a
-   cryptographic proof that Bob is responding to Alice's incoming
-   message.  Mallory wants to intercept this traffic and replace Alice's
-   message with her own, without Alice being aware that the interception
-   has taken place.
-
-   1.   Alice creates a message, Req_A and applies a signature Sig_A
-        using her private key Key_A_Sign.
-
-   2.   Alice believes she is sending Req_A to Bob.
-
-   3.   Mallory intercepts Req_A and reads the value Sig_A from this
-        message.
-
-   4.   Mallory generates a different message Req_M to send to Bob
-        instead.
-
-   5.   Mallory crafts a signing key Key_M_Sign such that she can create
-        a valid signature Sig_M over her request Req_M using this key,
-        but the byte value of Sig_M exactly equals that of Sig_A.
-
-   6.   Mallory sends Req_M with Sig_M to Bob.
-
-   7.   Bob validates Sig_M against Mallory's verification key,
-        Key_M_Verify.  At no time does Bob think that he's responding to
-        Alice.
-
-   8.   Bob responds with response message Res_B to Req_M and creates
-        signature Sig_B over this message using his key, Key_B_Sign.
-        Bob includes the value of Sig_M under Sig_B's covered
-        components, but nothing elese from the request message.
-
-   9.   Mallory receives the response Res_B from Bob, including the
-        signature Sig_B value.  Mallory replays this response to Alice.
-
-   10.  Alice reads Res_B from Mallory and verifies Sig_B using Bob's
-        verification key, Key_B_Verify.  Alice includes the bytes of her
-        original signature Sig_A in the signature base, and the
-        signature verifies.
-
-   11.  Alice is led to believe that Bob has responded to her message,
-        and believes she has cryptographic proof of this happening, but
-        in fact Bob responded to Mallory's malicious request and Alice
-        is none the wiser.
-
-   To mitigate this, Bob can sign more portions of the request message
-   than just the Signature field, in order to more fully differentiate
-   Alice's message from Mallory's.  Applications using this feature,
-   particularly for non-repudiation purposes, can stipulate that any
-   components required in the original signature also be covered
-   separately in the second signature.  For signed messages, requiring
-   coverage of the corresponding Signature-Input field of the first
-   signature ensures that unique items such as nonces and timestamps are
-   also covered sufficiently by the second signature.
-
 7.4.  Matching Covered Components to Message
 
 7.4.1.  Modification of Required Message Parameters
@@ -3968,11 +3900,9 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-
               digest-headers-10>.
 
-   [JACKSON2019]
-              Jackson, D., Cremers, C., Cohn-Gordon, K., and R. Sasse,
-              "Seems Legit: Automated Analysis of Subtle Attacks on
-              Protocols that Use Signatures", November 2019,
-              <https://dennis-jackson.uk/assets/pdfs/signatures.pdf>.
+   [JWS]      Jones, M., Bradley, J., and N. Sakimura, "JSON Web
+              Signature (JWS)", RFC 7515, DOI 10.17487/RFC7515, May
+              2015, <https://www.rfc-editor.org/rfc/rfc7515>.
 
    [RFC7239]  Petersson, A. and M. Nilsson, "Forwarded HTTP Extension",
               RFC 7239, DOI 10.17487/RFC7239, June 2014,

@@ -4,15 +4,16 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>HTTP Proxy-Status Parameter for Next-Hop Aliases</title>
-<meta content="Tommy Pauly" name="author">
+<title>The ORIGIN Extension in HTTP/3</title>
+<meta content="Mike Bishop" name="author">
 <meta content="
-       This document defines an HTTP Proxy-Status Parameter that contains a list of aliases
-and canonical names received over DNS when establishing a connection to the next hop. 
+       The ORIGIN frame for HTTP/2 is equally applicable to HTTP/3, but
+needs to be separately registered. This document describes the ORIGIN
+frame for HTTP/3. 
     " name="description">
 <meta content="xml2rfc 3.16.0" name="generator">
-<meta content="proxy status" name="keyword">
-<meta content="draft-ietf-httpbis-alias-proxy-status-latest" name="ietf.draft">
+<meta content="Internet-Draft" name="keyword">
+<meta content="draft-ietf-httpbis-origin-h3-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.16.0
     Python 3.10.10
@@ -31,7 +32,7 @@ and canonical names received over DNS when establishing a connection to the next
     six 1.16.0
     wcwidth 0.2.6
 -->
-<link href="draft-ietf-httpbis-alias-proxy-status.xml" rel="alternate" type="application/rfc+xml">
+<link href="draft-ietf-httpbis-origin-h3.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">@font-face {
   font-family: 'Lora';
@@ -1047,12 +1048,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <table class="ears">
 <thead><tr>
 <td class="left">Internet-Draft</td>
-<td class="center">DNS Aliases Proxy-Status</td>
+<td class="center">ORIGIN in HTTP/3</td>
 <td class="right">March 2023</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">Pauly</td>
-<td class="center">Expires 2 September 2023</td>
+<td class="left">Bishop</td>
+<td class="center">Expires 4 September 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1060,46 +1061,32 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <div id="internal-metadata" class="document-information">
 <dl id="identifiers">
 <dt class="label-workgroup">Workgroup:</dt>
-<dd class="workgroup">HTTP</dd>
+<dd class="workgroup">HTTPbis</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-ietf-httpbis-alias-proxy-status-latest</dd>
+<dd class="internet-draft">draft-ietf-httpbis-origin-h3-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-03-01" class="published">1 March 2023</time>
+<time datetime="2023-03-03" class="published">3 March 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-09-02">2 September 2023</time></dd>
+<dd class="expires"><time datetime="2023-09-04">4 September 2023</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
-      <div class="author-name">T. Pauly</div>
-<div class="org">Apple, Inc.</div>
+      <div class="author-name">M. Bishop</div>
+<div class="org">Akamai</div>
 </div>
 </dd>
 </dl>
 </div>
-<h1 id="title">HTTP Proxy-Status Parameter for Next-Hop Aliases</h1>
+<h1 id="title">The ORIGIN Extension in HTTP/3</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document defines an HTTP Proxy-Status Parameter that contains a list of aliases
-and canonical names received over DNS when establishing a connection to the next hop.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-</section>
-<section class="note rfcEditorRemove" id="section-note.1">
-      <h2 id="name-about-this-document">
-<a href="#name-about-this-document" class="section-name selfRef">About This Document</a>
-      </h2>
-<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
-<p id="section-note.1-2">
-        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-ietf-httpbis-alias-proxy-status/">https://datatracker.ietf.org/doc/draft-ietf-httpbis-alias-proxy-status/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
-<p id="section-note.1-3">
-        Discussion of this document takes place on the
-        HTTP Working Group mailing list (<span><a href="mailto:ietf-http-wg@w3.org">mailto:ietf-http-wg@w3.org</a></span>),
-        which is archived at <span><a href="https://lists.w3.org/Archives/Public/ietf-http-wg/">https://lists.w3.org/Archives/Public/ietf-http-wg/</a></span>.
-        Working Group information can be found at <span><a href="https://httpwg.org/">https://httpwg.org/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
-<p id="section-note.1-4">Source for this draft and an issue tracker can be found at
-        <span><a href="https://github.com/httpwg/http-extensions/labels/alias-proxy-status">https://github.com/httpwg/http-extensions/labels/alias-proxy-status</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">The ORIGIN frame for HTTP/2 is equally applicable to HTTP/3, but
+needs to be separately registered. This document describes the ORIGIN
+frame for HTTP/3.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1120,7 +1107,7 @@ and canonical names received over DNS when establishing a connection to the next
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 2 September 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 September 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1153,12 +1140,17 @@ and canonical names received over DNS when establishing a connection to the next
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-requirements" class="internal xref">Requirements</a></p>
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-notational-conventions" class="internal xref">Notational Conventions</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-next-hop-aliases-parameter" class="internal xref">next-hop-aliases Parameter</a></p>
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-the-origin-http-3-frame" class="internal xref">The ORIGIN HTTP/3 Frame</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
+                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-frame-layout" class="internal xref">Frame Layout</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
@@ -1184,128 +1176,137 @@ and canonical names received over DNS when establishing a connection to the next
 </nav>
 </section>
 </div>
-<div id="introduction">
+<div id="problems">
 <section id="section-1">
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">The Proxy-Status HTTP response field <span>[<a href="#PROXY-STATUS" class="cite xref">PROXY-STATUS</a>]</span> allows proxies to convey
-information about how a proxied request was handled in HTTP responses sent to clients.
-It defines a set of parameters that provide information, such as the name of the next
-hop.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2"><span>[<a href="#PROXY-STATUS" class="cite xref">PROXY-STATUS</a>]</span> defines a <code>next-hop</code> parameter, which can contain a hostname,
-IP address, or alias of the next hop. This parameter can contain only one such item,
-so it cannot be used to communicate a chain of aliases encountered during DNS resolution
-when connecting to the next hop.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">Knowing the full chain of names that were used during DNS resolution via CNAME records
-<span>[<a href="#DNS" class="cite xref">DNS</a>]</span> is particularly useful for clients of forward proxies, in which the
-client is requesting to connect to a specific target hostname using the CONNECT method
-<span>[<a href="#HTTP" class="cite xref">HTTP</a>]</span> or UDP proxying <span>[<a href="#CONNECT-UDP" class="cite xref">CONNECT-UDP</a>]</span>. CNAME records can be used to
-"cloak" hosts that perform tracking or malicious activity behind more innocuous hostnames,
-and clients such as web browsers use the chain of DNS names to influence behavior like cookie
-usage policies <span>[<a href="#COOKIES" class="cite xref">COOKIES</a>]</span> or blocking of malicious hosts.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">This document allows clients to receive the CNAME chain of DNS names for the next hop
-by including the list of names in a new <code>next-hop-aliases</code> Proxy-Status parameter.<a href="#section-1-4" class="pilcrow">¶</a></p>
-<div id="requirements">
+<p id="section-1-1">Existing RFCs define extensions to HTTP/2 <span>[<a href="#HTTP2" class="cite xref">HTTP2</a>]</span> which remain useful in
+HTTP/3. <span><a href="https://rfc-editor.org/rfc/rfc9114#appendix-A.2.3" class="relref">Appendix A.2.3</a> of [<a href="#HTTP3" class="cite xref">HTTP3</a>]</span> describes the required updates for HTTP/2
+frames to be used with HTTP/3.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2"><span>[<a href="#ORIGIN" class="cite xref">ORIGIN</a>]</span> defines the HTTP/2 ORIGIN frame, which indicates what
+origins are available on a given connection.  It defines a single HTTP/2 frame
+type.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<div id="notational-conventions">
 <section id="section-1.1">
-        <h3 id="name-requirements">
-<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-requirements" class="section-name selfRef">Requirements</a>
+        <h3 id="name-notational-conventions">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-notational-conventions" class="section-name selfRef">Notational Conventions</a>
         </h3>
-<p id="section-1.1-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
-NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
-"MAY", and "OPTIONAL" in this document are to be interpreted as
+<p id="section-1.1-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+"<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">Frame diagrams in this document use the format defined in <span><a href="https://rfc-editor.org/rfc/rfc9000#section-1.3" class="relref">Section 1.3</a> of [<a href="#QUIC-TRANSPORT" class="cite xref">QUIC-TRANSPORT</a>]</span> to illustrate the order and size of fields.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
-<div id="parameter">
+<div id="frame-origin">
 <section id="section-2">
-      <h2 id="name-next-hop-aliases-parameter">
-<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-next-hop-aliases-parameter" class="section-name selfRef">next-hop-aliases Parameter</a>
+      <h2 id="name-the-origin-http-3-frame">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-the-origin-http-3-frame" class="section-name selfRef">The ORIGIN HTTP/3 Frame</a>
       </h2>
-<p id="section-2-1">The <code>next-hop-aliases</code> parameter's value is a String that contains one or more DNS names in
-a comma-separated list. The items in the list include all alias names and canonical names
-received in CNAME records <span>[<a href="#DNS" class="cite xref">DNS</a>]</span> during the course of resolving the next hop's
-hostname using DNS, not including the original requested hostname itself. The names SHOULD
-appear in the order in which they were received in DNS. If there are multiple CNAME records
-in the chain, the first name in the <code>next-hop-aliases</code> list would be the value in the CNAME
-record for the original hostname, and the final name in the <code>next-hop-aliases</code> list would
-be the name that ultimately resolved to one or more addresses.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">The list of DNS names in <code>next-hop-aliases</code> use a comma (",") as a separator between names.
-DNS names normally just contain alphanumeric characters and hyphens ("-"), although they
-are allowed to contain any character <span>[<a href="#RFC1035" class="cite xref">RFC1035</a>], <a href="https://rfc-editor.org/rfc/rfc1035#section-3.1" class="relref">Section 3.1</a></span>, including a comma. To
-prevent commas or other special characters in names leading to incorrect parsing,
-any characters that appear in names in this list that do not belong to the set of URI
-Unreserved Characters <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-2.3" class="relref">Section 2.3</a></span> MUST be percent-encoded as
-defined in <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>], <a href="https://rfc-editor.org/rfc/rfc3986#section-2.1" class="relref">Section 2.1</a></span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
-<p id="section-2-3">For example, consider a proxy "proxy.example.net" that receives the following records when
-performing DNS resolution for the next hop "host.example.com":<a href="#section-2-3" class="pilcrow">¶</a></p>
-<div class="lang-dns-example sourcecode" id="section-2-4">
+<p id="section-2-1">The ORIGIN HTTP/3 frame allows a server to indicate what origin(s)
+(<span>[<a href="#RFC6454" class="cite xref">RFC6454</a>]</span>) the server would like the client to consider as members of the
+Origin Set (<span><a href="https://rfc-editor.org/rfc/rfc8336#section-2.3" class="relref">Section 2.3</a> of [<a href="#ORIGIN" class="cite xref">ORIGIN</a>]</span>) for the connection within which it
+occurs.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">The semantics of the frame payload are identical to those of the HTTP/2 frame
+defined in <span>[<a href="#ORIGIN" class="cite xref">ORIGIN</a>]</span>. Where HTTP/2 reserves Stream 0 for frames related to the
+state of the connection, HTTP/3 defines a pair of unidirectional streams called
+"control streams" for this purpose.  Where <span>[<a href="#ORIGIN" class="cite xref">ORIGIN</a>]</span> indicates that the ORIGIN
+frame should be sent on Stream 0, this should be interpreted to mean the HTTP/3
+control stream.  The ORIGIN frame is sent from servers to clients on the
+server's control stream.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-3">HTTP/3 does not define a Flags field in the generic frame layout. As no flags
+have been defined for the ORIGIN frame, this specification does not define a
+mechanism for communicating such flags in HTTP/3.<a href="#section-2-3" class="pilcrow">¶</a></p>
+<div id="frame-layout">
+<section id="section-2.1">
+        <h3 id="name-frame-layout">
+<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-frame-layout" class="section-name selfRef">Frame Layout</a>
+        </h3>
+<p id="section-2.1-1">The ORIGIN frame has a nearly identical layout to that used in HTTP/2, restated
+here for clarity.  The ORIGIN frame type is 0xc (decimal 12) as in HTTP/2. The
+payload contains zero or more instances of the Origin-Entry field.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<span id="name-origin-frame-layout"></span><figure id="figure-1">
+          <div class="alignLeft art-ascii-art art-text artwork" id="section-2.1-2.1">
 <pre>
-host.example.com.           CNAME   tracker.example.com.
-tracker.example.com.        CNAME   service1.example-cdn.com.
-service1.example-cdn.com.   AAAA    2001:db8::1
-</pre><a href="#section-2-4" class="pilcrow">¶</a>
+HTTP/3 Origin-Entry {
+  Origin-Len (16),
+  ASCII-Origin (..),
+}
+
+HTTP/3 ORIGIN Frame {
+  Type (i) = 0x0c,
+  Length (i),
+  Origin-Entry (..) ...,
+}
+</pre>
 </div>
-<p id="section-2-5">The proxy could include the following proxy status in its response:<a href="#section-2-5" class="pilcrow">¶</a></p>
-<div class="lang-example sourcecode" id="section-2-6">
-<pre>
-Proxy-Status: proxy.example.net; next-hop=2001:db8::1;
-    next-hop-aliases="tracker.example.com,service1.example-cdn.com"
-</pre><a href="#section-2-6" class="pilcrow">¶</a>
-</div>
-<p id="section-2-7">This indicates that proxy.example.net, which used the IP address "2001:db8::1" as the next hop
-for this request, encountered the names "tracker.example.com" and "service1.example-cdn.com"
-in the DNS resolution chain. Note that while this example includes both the <code>next-hop</code> and
-<code>next-hop-aliases</code> parameters, <code>next-hop-aliases</code> can be included without including <code>next-hop</code>.<a href="#section-2-7" class="pilcrow">¶</a></p>
-<p id="section-2-8">The <code>next-hop-aliases</code> parameter only applies when DNS was used to resolve the next hop's name, and
-does not apply in all situations. Clients can use the information in this parameter to determine
-how to use the connection established through the proxy, but need to gracefully handle situations
-in which this parameter is not present.<a href="#section-2-8" class="pilcrow">¶</a></p>
-<p id="section-2-9">The proxy MAY send the empty string ("") as the value of <code>next-hop-aliases</code> to indicate that
-no CNAME records were encountered when resolving the next hop's name.<a href="#section-2-9" class="pilcrow">¶</a></p>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-origin-frame-layout" class="selfRef">ORIGIN Frame Layout</a>
+          </figcaption></figure>
+<p id="section-2.1-3">An Origin-Entry is a length-delimited string. Specifically, it contains two
+fields:<a href="#section-2.1-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-2.1-4">
+          <dt id="section-2.1-4.1">Origin-Len:</dt>
+          <dd style="margin-left: 1.5em" id="section-2.1-4.2">
+            <p id="section-2.1-4.2.1">An unsigned, 16-bit integer indicating the length, in octets, of
+the ASCII-Origin field.<a href="#section-2.1-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-2.1-4.3">ASCII-Origin:</dt>
+          <dd style="margin-left: 1.5em" id="section-2.1-4.4">
+            <p id="section-2.1-4.4.1">An <span class="bcp14">OPTIONAL</span> sequence of characters containing the ASCII serialization of an
+origin (<span>[<a href="#RFC6454" class="cite xref">RFC6454</a>], <a href="https://rfc-editor.org/rfc/rfc6454#section-6.2" class="relref">Section 6.2</a></span>) that the sender asserts this connection is
+or could be authoritative for.<a href="#section-2.1-4.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+</dl>
 </section>
 </div>
-<div id="sec-considerations">
+</section>
+</div>
+<div id="security">
 <section id="section-3">
       <h2 id="name-security-considerations">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-3-1">The <code>next-hop-aliases</code> parameter does not include any DNSSEC information or imply that DNSSEC was used.
-The information included in the parameter can only be trusted to be valid insofar as the client
-trusts its proxy to provide accurate information. This information is intended to be used as
-a hint, and SHOULD NOT be used for making security decisions about the identity of a resource accessed
-through the proxy.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">This document introduces no new security considerations beyond those discussed
+in <span>[<a href="#ORIGIN" class="cite xref">ORIGIN</a>]</span> and <span>[<a href="#HTTP3" class="cite xref">HTTP3</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="iana-considerations">
+<div id="iana">
 <section id="section-4">
       <h2 id="name-iana-considerations">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-4-1">This document registers the "next-hop-aliases" parameter
-in the "HTTP Proxy-Status Parameters" registry
-&lt;<span><a href="https://www.iana.org/assignments/http-proxy-status">https://www.iana.org/assignments/http-proxy-status</a></span>&gt;.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-4-2">
-        <dt id="section-4-2.1">Name:</dt>
-        <dd style="margin-left: 1.5em" id="section-4-2.2">
-          <p id="section-4-2.2.1">next-hop-aliases<a href="#section-4-2.2.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-4-2.3">Description:</dt>
-        <dd style="margin-left: 1.5em" id="section-4-2.4">
-          <p id="section-4-2.4.1">A string containing one or more DNS aliases or canonical names used to establish a
-proxied connection to the next hop.<a href="#section-4-2.4.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-4-2.5">Reference:</dt>
-        <dd style="margin-left: 1.5em" id="section-4-2.6">
-          <p id="section-4-2.6.1">This document<a href="#section-4-2.6.1" class="pilcrow">¶</a></p>
-</dd>
-      <dd class="break"></dd>
-</dl>
+<p id="section-4-1">This document registers a frame type in the "HTTP/3 Frame Type"
+registry (<span>[<a href="#HTTP3" class="cite xref">HTTP3</a>]</span>).<a href="#section-4-1" class="pilcrow">¶</a></p>
+<span id="name-registered-http-3-frame-typ"></span><div id="iana-frame-table">
+<table class="center" id="table-1">
+        <caption>
+<a href="#table-1" class="selfRef">Table 1</a>:
+<a href="#name-registered-http-3-frame-typ" class="selfRef">Registered HTTP/3 Frame Types</a>
+        </caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">Frame Type</th>
+            <th class="text-center" rowspan="1" colspan="1">Value</th>
+            <th class="text-left" rowspan="1" colspan="1">Specification</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">ORIGIN</td>
+            <td class="text-center" rowspan="1" colspan="1">0xc</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <a href="#frame-origin" class="auto internal xref">Section 2</a>
+</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
 </section>
 </div>
 <section id="section-5">
@@ -1317,29 +1318,21 @@ proxied connection to the next hop.<a href="#section-4-2.4.1" class="pilcrow">¶
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
-<dt id="CONNECT-UDP">[CONNECT-UDP]</dt>
+<dt id="HTTP2">[HTTP2]</dt>
         <dd>
-<span class="refAuthor">Schinazi, D.</span>, <span class="refTitle">"Proxying UDP in HTTP"</span>, <span class="seriesInfo">RFC 9298</span>, <span class="seriesInfo">DOI 10.17487/RFC9298</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9298">https://www.rfc-editor.org/rfc/rfc9298</a>&gt;</span>. </dd>
+<span class="refAuthor">Thomson, M., Ed.</span> and <span class="refAuthor">C. Benfield, Ed.</span>, <span class="refTitle">"HTTP/2"</span>, <span class="seriesInfo">RFC 9113</span>, <span class="seriesInfo">DOI 10.17487/RFC9113</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9113">https://www.rfc-editor.org/rfc/rfc9113</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="DNS">[DNS]</dt>
+<dt id="HTTP3">[HTTP3]</dt>
         <dd>
-<span class="refAuthor">Mockapetris, P.</span>, <span class="refTitle">"Domain names - concepts and facilities"</span>, <span class="seriesInfo">STD 13</span>, <span class="seriesInfo">RFC 1034</span>, <span class="seriesInfo">DOI 10.17487/RFC1034</span>, <time datetime="1987-11" class="refDate">November 1987</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc1034">https://www.rfc-editor.org/rfc/rfc1034</a>&gt;</span>. </dd>
+<span class="refAuthor">Bishop, M., Ed.</span>, <span class="refTitle">"HTTP/3"</span>, <span class="seriesInfo">RFC 9114</span>, <span class="seriesInfo">DOI 10.17487/RFC9114</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9114">https://www.rfc-editor.org/rfc/rfc9114</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="HTTP">[HTTP]</dt>
+<dt id="ORIGIN">[ORIGIN]</dt>
         <dd>
-<span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Semantics"</span>, <span class="seriesInfo">STD 97</span>, <span class="seriesInfo">RFC 9110</span>, <span class="seriesInfo">DOI 10.17487/RFC9110</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9110">https://www.rfc-editor.org/rfc/rfc9110</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="PROXY-STATUS">[PROXY-STATUS]</dt>
-        <dd>
-<span class="refAuthor">Nottingham, M.</span> and <span class="refAuthor">P. Sikora</span>, <span class="refTitle">"The Proxy-Status HTTP Response Header Field"</span>, <span class="seriesInfo">RFC 9209</span>, <span class="seriesInfo">DOI 10.17487/RFC9209</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9209">https://www.rfc-editor.org/rfc/rfc9209</a>&gt;</span>. </dd>
+<span class="refAuthor">Nottingham, M.</span> and <span class="refAuthor">E. Nygren</span>, <span class="refTitle">"The ORIGIN HTTP/2 Frame"</span>, <span class="seriesInfo">RFC 8336</span>, <span class="seriesInfo">DOI 10.17487/RFC8336</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8336">https://www.rfc-editor.org/rfc/rfc8336</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC3986">[RFC3986]</dt>
-        <dd>
-<span class="refAuthor">Berners-Lee, T.</span>, <span class="refAuthor">Fielding, R.</span>, and <span class="refAuthor">L. Masinter</span>, <span class="refTitle">"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span class="seriesInfo">STD 66</span>, <span class="seriesInfo">RFC 3986</span>, <span class="seriesInfo">DOI 10.17487/RFC3986</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3986">https://www.rfc-editor.org/rfc/rfc3986</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
       <dd>
@@ -1352,13 +1345,13 @@ proxied connection to the next hop.<a href="#section-4-2.4.1" class="pilcrow">¶
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
-<dt id="COOKIES">[COOKIES]</dt>
+<dt id="QUIC-TRANSPORT">[QUIC-TRANSPORT]</dt>
         <dd>
-<span class="refAuthor">Barth, A.</span>, <span class="refTitle">"HTTP State Management Mechanism"</span>, <span class="seriesInfo">RFC 6265</span>, <span class="seriesInfo">DOI 10.17487/RFC6265</span>, <time datetime="2011-04" class="refDate">April 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6265">https://www.rfc-editor.org/rfc/rfc6265</a>&gt;</span>. </dd>
+<span class="refAuthor">Iyengar, J., Ed.</span> and <span class="refAuthor">M. Thomson, Ed.</span>, <span class="refTitle">"QUIC: A UDP-Based Multiplexed and Secure Transport"</span>, <span class="seriesInfo">RFC 9000</span>, <span class="seriesInfo">DOI 10.17487/RFC9000</span>, <time datetime="2021-05" class="refDate">May 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9000">https://www.rfc-editor.org/rfc/rfc9000</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC1035">[RFC1035]</dt>
+<dt id="RFC6454">[RFC6454]</dt>
       <dd>
-<span class="refAuthor">Mockapetris, P.</span>, <span class="refTitle">"Domain names - implementation and specification"</span>, <span class="seriesInfo">STD 13</span>, <span class="seriesInfo">RFC 1035</span>, <span class="seriesInfo">DOI 10.17487/RFC1035</span>, <time datetime="1987-11" class="refDate">November 1987</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc1035">https://www.rfc-editor.org/rfc/rfc1035</a>&gt;</span>. </dd>
+<span class="refAuthor">Barth, A.</span>, <span class="refTitle">"The Web Origin Concept"</span>, <span class="seriesInfo">RFC 6454</span>, <span class="seriesInfo">DOI 10.17487/RFC6454</span>, <time datetime="2011-12" class="refDate">December 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6454">https://www.rfc-editor.org/rfc/rfc6454</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1369,11 +1362,11 @@ proxied connection to the next hop.<a href="#section-4-2.4.1" class="pilcrow">¶
 <a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
       </h2>
 <address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Tommy Pauly</span></div>
-<div dir="auto" class="left"><span class="org">Apple, Inc.</span></div>
+        <div dir="auto" class="left"><span class="fn nameRole">Mike Bishop</span></div>
+<div dir="auto" class="left"><span class="org">Akamai</span></div>
 <div class="email">
 <span>Email:</span>
-<a href="mailto:tpauly@apple.com" class="email">tpauly@apple.com</a>
+<a href="mailto:mbishop@evequefou.be" class="email">mbishop@evequefou.be</a>
 </div>
 </address>
 </section>

@@ -1058,7 +1058,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Polli &amp; Pardue</td>
-<td class="center">Expires 2 September 2023</td>
+<td class="center">Expires 4 September 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1074,12 +1074,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc3230" class="eref">3230</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-03-01" class="published">1 March 2023</time>
+<time datetime="2023-03-03" class="published">3 March 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-09-02">2 September 2023</time></dd>
+<dd class="expires"><time datetime="2023-09-04">4 September 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1138,7 +1138,7 @@ fields.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 2 September 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 September 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1202,7 +1202,7 @@ fields.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-integrity-preference-fields" class="internal xref">Integrity preference fields</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-hash-algorithms-for-http-di" class="internal xref">Hash Algorithms for HTTP Digest Fields Registry</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-hash-algorithm-consideratio" class="internal xref">Hash Algorithm Considerations and Registration</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
@@ -1220,7 +1220,7 @@ fields.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
                 <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="auto internal xref">6.4</a>.  <a href="#name-usage-in-trailer-fields" class="internal xref">Usage in Trailer Fields</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.5">
-                <p id="section-toc.1-1.6.2.5.1"><a href="#section-6.5" class="auto internal xref">6.5</a>.  <a href="#name-usage-with-encryption" class="internal xref">Usage with Encryption</a></p>
+                <p id="section-toc.1-1.6.2.5.1"><a href="#section-6.5" class="auto internal xref">6.5</a>.  <a href="#name-variations-within-content-e" class="internal xref">Variations Within Content Encoding</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.6">
                 <p id="section-toc.1-1.6.2.6.1"><a href="#section-6.6" class="auto internal xref">6.6</a>.  <a href="#name-algorithm-agility" class="internal xref">Algorithm Agility</a></p>
@@ -1238,6 +1238,9 @@ fields.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
                 <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-establish-the-hash-algorith" class="internal xref">Establish the Hash Algorithms for HTTP Digest Fields Registry</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-deprecate-the-hypertext-tra" class="internal xref">Deprecate the Hypertext Transfer Protocol (HTTP) Digest Algorithm Values Registry</a></p>
 </li>
             </ul>
 </li>
@@ -1308,48 +1311,57 @@ fields.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-migrating-from-rfc-3230" class="internal xref">Migrating from RFC 3230</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-sample-digest-values" class="internal xref">Sample Digest Values</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#appendix-E" class="auto internal xref">Appendix E</a>.  <a href="#name-migrating-from-rfc-3230" class="internal xref">Migrating from RFC 3230</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#appendix-F" class="auto internal xref"></a><a href="#name-code-samples" class="internal xref">Code Samples</a></p>
+            <p id="section-toc.1-1.14.1"><a href="#appendix-F" class="auto internal xref"></a><a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15">
-            <p id="section-toc.1-1.15.1"><a href="#appendix-G" class="auto internal xref"></a><a href="#name-changes" class="internal xref">Changes</a></p>
+            <p id="section-toc.1-1.15.1"><a href="#appendix-G" class="auto internal xref"></a><a href="#name-code-samples" class="internal xref">Code Samples</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
+            <p id="section-toc.1-1.16.1"><a href="#appendix-H" class="auto internal xref"></a><a href="#name-changes" class="internal xref">Changes</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.1">
-                <p id="section-toc.1-1.15.2.1.1"><a href="#appendix-G.1" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-di" class="internal xref">Since draft-ietf-httpbis-digest-headers-08</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.1">
+                <p id="section-toc.1-1.16.2.1.1"><a href="#appendix-H.1" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-di" class="internal xref">Since draft-ietf-httpbis-digest-headers-10</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.2">
-                <p id="section-toc.1-1.15.2.2.1"><a href="#appendix-G.2" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-dig" class="internal xref">Since draft-ietf-httpbis-digest-headers-07</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.2">
+                <p id="section-toc.1-1.16.2.2.1"><a href="#appendix-H.2" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-dig" class="internal xref">Since draft-ietf-httpbis-digest-headers-09</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.3">
-                <p id="section-toc.1-1.15.2.3.1"><a href="#appendix-G.3" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-dige" class="internal xref">Since draft-ietf-httpbis-digest-headers-06</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.3">
+                <p id="section-toc.1-1.16.2.3.1"><a href="#appendix-H.3" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-dige" class="internal xref">Since draft-ietf-httpbis-digest-headers-08</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.4">
-                <p id="section-toc.1-1.15.2.4.1"><a href="#appendix-G.4" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-diges" class="internal xref">Since draft-ietf-httpbis-digest-headers-05</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.4">
+                <p id="section-toc.1-1.16.2.4.1"><a href="#appendix-H.4" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-diges" class="internal xref">Since draft-ietf-httpbis-digest-headers-07</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.5">
-                <p id="section-toc.1-1.15.2.5.1"><a href="#appendix-G.5" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-digest" class="internal xref">Since draft-ietf-httpbis-digest-headers-04</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.5">
+                <p id="section-toc.1-1.16.2.5.1"><a href="#appendix-H.5" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-digest" class="internal xref">Since draft-ietf-httpbis-digest-headers-06</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.6">
-                <p id="section-toc.1-1.15.2.6.1"><a href="#appendix-G.6" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-digest-" class="internal xref">Since draft-ietf-httpbis-digest-headers-03</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.6">
+                <p id="section-toc.1-1.16.2.6.1"><a href="#appendix-H.6" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-digest-" class="internal xref">Since draft-ietf-httpbis-digest-headers-05</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.7">
-                <p id="section-toc.1-1.15.2.7.1"><a href="#appendix-G.7" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-digest-h" class="internal xref">Since draft-ietf-httpbis-digest-headers-02</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.7">
+                <p id="section-toc.1-1.16.2.7.1"><a href="#appendix-H.7" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-digest-h" class="internal xref">Since draft-ietf-httpbis-digest-headers-04</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.8">
-                <p id="section-toc.1-1.15.2.8.1"><a href="#appendix-G.8" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-digest-he" class="internal xref">Since draft-ietf-httpbis-digest-headers-01</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.8">
+                <p id="section-toc.1-1.16.2.8.1"><a href="#appendix-H.8" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-digest-he" class="internal xref">Since draft-ietf-httpbis-digest-headers-03</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15.2.9">
-                <p id="section-toc.1-1.15.2.9.1"><a href="#appendix-G.9" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-digest-hea" class="internal xref">Since draft-ietf-httpbis-digest-headers-00</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.9">
+                <p id="section-toc.1-1.16.2.9.1"><a href="#appendix-H.9" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-digest-hea" class="internal xref">Since draft-ietf-httpbis-digest-headers-02</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.10">
+                <p id="section-toc.1-1.16.2.10.1"><a href="#appendix-H.10" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-digest-hea-2" class="internal xref">Since draft-ietf-httpbis-digest-headers-01</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16.2.11">
+                <p id="section-toc.1-1.16.2.11.1"><a href="#appendix-H.11" class="auto internal xref"></a><a href="#name-since-draft-ietf-httpbis-digest-hea-3" class="internal xref">Since draft-ietf-httpbis-digest-headers-00</a></p>
 </li>
             </ul>
 </li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
-            <p id="section-toc.1-1.16.1"><a href="#appendix-H" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.17">
+            <p id="section-toc.1-1.17.1"><a href="#appendix-I" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1419,7 +1431,7 @@ of Repr-Digest and Want-Repr-Digest fields in message exchanges.<a href="#sectio
             </ul>
 </li>
           <li class="normal" id="section-1.1-2.3">
-            <a href="#algorithms" class="auto internal xref">Section 5</a> bootstraps a new IANA registry hash algorithms and defines
+            <a href="#algorithms" class="auto internal xref">Section 5</a> presents hash algorithm considerations and defines
 registration procedures for future entries.<a href="#section-1.1-2.3" class="pilcrow">¶</a>
 </li>
         </ul>
@@ -1539,8 +1551,9 @@ where each:<a href="#section-2-1" class="pilcrow">¶</a></p>
 <li class="normal" id="section-2-2.1">key conveys the hashing algorithm (see <a href="#algorithms" class="auto internal xref">Section 5</a>)
 used to compute the digest;<a href="#section-2-2.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-2-2.2">value is a <code>Byte Sequence</code> (<span><a href="https://rfc-editor.org/rfc/rfc8941#section-3.3.5" class="relref">Section 3.3.5</a> of [<a href="#STRUCTURED-FIELDS" class="cite xref">STRUCTURED-FIELDS</a>]</span>),
-that contains the output of the digest calculation.<a href="#section-2-2.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-2-2.2">value is a <code>Byte Sequence</code> (<span><a href="https://rfc-editor.org/rfc/rfc8941#section-3.3.5" class="relref">Section 3.3.5</a> of [<a href="#STRUCTURED-FIELDS" class="cite xref">STRUCTURED-FIELDS</a>]</span>), that
+conveys an encoded version of the byte output produced by the digest
+calculation.<a href="#section-2-2.2" class="pilcrow">¶</a>
 </li>
       </ul>
 <p id="section-2-3">For example:<a href="#section-2-3" class="pilcrow">¶</a></p>
@@ -1600,8 +1613,8 @@ string (see <a href="#usage-in-signatures" class="auto internal xref">Section 6.
 <li class="normal" id="section-3-5.1">key conveys the hashing algorithm (see <a href="#algorithms" class="auto internal xref">Section 5</a>)
 used to compute the digest;<a href="#section-3-5.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-5.2">value is a <code>Byte Sequence</code> that
-contains the output of the digest calculation.<a href="#section-3-5.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-5.2">value is a <code>Byte Sequence</code>, that conveys an encoded version of the byte
+output produced by the digest calculation.<a href="#section-3-5.2" class="pilcrow">¶</a>
 </li>
       </ul>
 <p id="section-3-6">For example:<a href="#section-3-6" class="pilcrow">¶</a></p>
@@ -1735,118 +1748,71 @@ Want-Content-Digest: sha-512=3, sha-256=10, unixsum=0
 </div>
 <div id="algorithms">
 <section id="section-5">
-      <h2 id="name-hash-algorithms-for-http-di">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-hash-algorithms-for-http-di" class="section-name selfRef">Hash Algorithms for HTTP Digest Fields Registry</a>
+      <h2 id="name-hash-algorithm-consideratio">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-hash-algorithm-consideratio" class="section-name selfRef">Hash Algorithm Considerations and Registration</a>
       </h2>
-<p id="section-5-1">The "Hash Algorithms for HTTP Digest Fields", maintained by IANA at
-<a href="https://www.iana.org/assignments/http-dig-alg/">https://www.iana.org/assignments/http-dig-alg/</a>, registers algorithms for use
-with the Integrity and Integrity preference fields defined in this document.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">This registry uses the Specification
-Required policy (<span><a href="https://rfc-editor.org/rfc/rfc8126#section-4.6" class="relref">Section 4.6</a> of [<a href="#RFC8126" class="cite xref">RFC8126</a>]</span>).<a href="#section-5-2" class="pilcrow">¶</a></p>
-<p id="section-5-3">Registrations <span class="bcp14">MUST</span> include the following fields:<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-1">There are a wide variety of hashing algorithms that can be used for the purposes
+of integrity. The choice of algorithm depends on several factors such as the
+integrity use case, implementation needs or constraints, or application design
+and workflows.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">An initial set of algorithms will be registered with IANA in the "Hash
+Algorithms for HTTP Digest Fields" registry; see
+<a href="#establish-hash-algorithm-registry" class="auto internal xref">Section 7.2</a>. Additional algorithms can be registered
+in accordance with the policies set out in this section.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">Each algorithm has a status field, which is intended to provide an aid to
+implementation selection.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">Algorithms with a status value of "standard" are suitable for many purposes,
+including adversarial situations where hash functions might need to provide
+resistance to collision, first-preimage and second-preimage attacks. For
+adversarial situations, selecting which of the "standard" algorithms are
+acceptable will depend on the level of protection the circumstances demand. As
+there is no negotiation, endpoints that depend on a digest for security will be
+vulnerable to attacks on the weakest algorithm they are willing to accept.<a href="#section-5-4" class="pilcrow">¶</a></p>
+<p id="section-5-5">Algorithms with a status value of "insecure" either provide none of these
+properties, or are known to be weak (see <span>[<a href="#NO-MD5" class="cite xref">NO-MD5</a>]</span> and <span>[<a href="#NO-SHA" class="cite xref">NO-SHA</a>]</span>). These
+algorithms <span class="bcp14">MAY</span> be used to preserve integrity against corruption, but <span class="bcp14">MUST NOT</span> be
+used in a potentially adversarial setting; for example, when signing Integrity
+fields' values for authenticity.<a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-5-6">Discussion of algorithm agility is presented in <a href="#sec-agility" class="auto internal xref">Section 6.6</a>.<a href="#section-5-6" class="pilcrow">¶</a></p>
+<p id="section-5-7">Registration requests for the "Hash Algorithms for HTTP Digest Fields" registry
+use the Specification Required policy (<span><a href="https://rfc-editor.org/rfc/rfc8126#section-4.6" class="relref">Section 4.6</a> of [<a href="#RFC8126" class="cite xref">RFC8126</a>]</span>). Requests
+should use the following template:<a href="#section-5-7" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5-4.1">Algorithm Key: the Structured Fields key value used in
+<li class="normal" id="section-5-8.1">Algorithm Key: the Structured Fields key value used in
 <code>Content-Digest</code>, <code>Repr-Digest</code>, <code>Want-Content-Digest</code>, or <code>Want-Repr-Digest</code>
- field Dictionary member keys<a href="#section-5-4.1" class="pilcrow">¶</a>
+ field Dictionary member keys<a href="#section-5-8.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-5-4.2">
-          <p id="section-5-4.2.1">Status: the status of the algorithm.
-  Use "standard" for standardized algorithms without known problems;
-  "experimental" or some other appropriate value<a href="#section-5-4.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-5-8.2">
+          <p id="section-5-8.2.1">Status: the status of the algorithm. The options are:<a href="#section-5-8.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5-4.2.2.1">e.g. according to the type and status of the primary document
-  in which the algorithm is defined;
-  "insecure" when the algorithm is insecure;
-  "reserved" when the algorithm references a reserved token value<a href="#section-5-4.2.2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-5-8.2.2.1">"standard" - for standardized algorithms without known problems,<a href="#section-5-8.2.2.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-5-8.2.2.2">"provisional" - for non-standard or unproven algorithms,<a href="#section-5-8.2.2.2" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-5-8.2.2.3">"insecure" - for insecure algorithms,<a href="#section-5-8.2.2.3" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-5-8.2.2.4">"reserved"  - for algorithms that use a reserved token value that cannot be expressed in Structured Fields<a href="#section-5-8.2.2.4" class="pilcrow">¶</a>
 </li>
           </ul>
 </li>
-        <li class="normal" id="section-5-4.3">Description: a short description of the algorithm<a href="#section-5-4.3" class="pilcrow">¶</a>
+        <li class="normal" id="section-5-8.3">Description: a short description of the algorithm<a href="#section-5-8.3" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-5-4.4">Reference(s): a set of pointers to the primary documents defining the
-algorithm and key<a href="#section-5-4.4" class="pilcrow">¶</a>
+        <li class="normal" id="section-5-8.4">Reference(s): pointer(s) to the primary document(s) defining the technical
+details of the algorithm, and optionally the key<a href="#section-5-8.4" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="section-5-5">Insecure hashing algorithms <span class="bcp14">MAY</span> be used to preserve integrity against corruption,
-but <span class="bcp14">MUST NOT</span> be used in a potentially adversarial setting;
-for example, when signing Integrity fields' values for authenticity.<a href="#section-5-5" class="pilcrow">¶</a></p>
-<p id="section-5-6">The entries in <a href="#iana-hash-algorithm-table" class="auto internal xref">Table 1</a> are registered by this document.<a href="#section-5-6" class="pilcrow">¶</a></p>
-<span id="name-initial-hash-algorithms"></span><div id="iana-hash-algorithm-table">
-<table class="center" id="table-1">
-        <caption>
-<a href="#table-1" class="selfRef">Table 1</a>:
-<a href="#name-initial-hash-algorithms" class="selfRef">Initial Hash Algorithms</a>
-        </caption>
-<thead>
-          <tr>
-            <th class="text-left" rowspan="1" colspan="1">Algorithm Key</th>
-            <th class="text-left" rowspan="1" colspan="1">Status</th>
-            <th class="text-left" rowspan="1" colspan="1">Description</th>
-            <th class="text-left" rowspan="1" colspan="1">Reference(s)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">sha-512</td>
-            <td class="text-left" rowspan="1" colspan="1">standard</td>
-            <td class="text-left" rowspan="1" colspan="1">The SHA-512 algorithm.</td>
-            <td class="text-left" rowspan="1" colspan="1">
-              <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span>, <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, this document.</td>
-          </tr>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">sha-256</td>
-            <td class="text-left" rowspan="1" colspan="1">standard</td>
-            <td class="text-left" rowspan="1" colspan="1">The SHA-256 algorithm.</td>
-            <td class="text-left" rowspan="1" colspan="1">
-              <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span>, <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, this document.</td>
-          </tr>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">md5</td>
-            <td class="text-left" rowspan="1" colspan="1">insecure</td>
-            <td class="text-left" rowspan="1" colspan="1">The MD5 algorithm. It is vulnerable to collision attacks; see <span>[<a href="#NO-MD5" class="cite xref">NO-MD5</a>]</span> and <span>[<a href="#CMU-836068" class="cite xref">CMU-836068</a>]</span>
-</td>
-            <td class="text-left" rowspan="1" colspan="1">
-              <span>[<a href="#RFC1321" class="cite xref">RFC1321</a>]</span>, <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, this document.</td>
-          </tr>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">sha</td>
-            <td class="text-left" rowspan="1" colspan="1">insecure</td>
-            <td class="text-left" rowspan="1" colspan="1">The SHA-1 algorithm. It is vulnerable to collision attacks; see <span>[<a href="#NO-SHA" class="cite xref">NO-SHA</a>]</span> and <span>[<a href="#IACR-2020-014" class="cite xref">IACR-2020-014</a>]</span>
-</td>
-            <td class="text-left" rowspan="1" colspan="1">
-              <span>[<a href="#RFC3174" class="cite xref">RFC3174</a>]</span>, <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span> this document.</td>
-          </tr>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">unixsum</td>
-            <td class="text-left" rowspan="1" colspan="1">insecure</td>
-            <td class="text-left" rowspan="1" colspan="1">The algorithm used by the UNIX "sum" command.</td>
-            <td class="text-left" rowspan="1" colspan="1">
-              <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span>, <span>[<a href="#UNIX" class="cite xref">UNIX</a>]</span>, this document.</td>
-          </tr>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">unixcksum</td>
-            <td class="text-left" rowspan="1" colspan="1">insecure</td>
-            <td class="text-left" rowspan="1" colspan="1">The algorithm used by the UNIX "cksum" command.</td>
-            <td class="text-left" rowspan="1" colspan="1">
-              <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span>, <span>[<a href="#UNIX" class="cite xref">UNIX</a>]</span>, this document.</td>
-          </tr>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">adler</td>
-            <td class="text-left" rowspan="1" colspan="1">insecure</td>
-            <td class="text-left" rowspan="1" colspan="1">The ADLER32 algorithm.</td>
-            <td class="text-left" rowspan="1" colspan="1">
-              <span>[<a href="#RFC1950" class="cite xref">RFC1950</a>]</span>, this document.</td>
-          </tr>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">crc32c</td>
-            <td class="text-left" rowspan="1" colspan="1">insecure</td>
-            <td class="text-left" rowspan="1" colspan="1">The CRC32c algorithm.</td>
-            <td class="text-left" rowspan="1" colspan="1">
-              <span>[<a href="#RFC9260" class="cite xref">RFC9260</a>]</span> appendix B, this document.</td>
-          </tr>
-        </tbody>
-      </table>
-</div>
+<p id="section-5-9">When reviewing registration requests, the designated expert(s) should pay
+attention to the requested status. The status value should reflect
+standardization status and the broad opinion of relevant interest groups such as
+the IETF or security-related SDOs. The "standard" status is not suitable for an
+algorithm that is known to be weak, broken or experimental. If a registration
+request attempts to register such an algorithm as "standard", the designated
+expert(s) should suggest an alternative status of "insecure" or "provisional".<a href="#section-5-9" class="pilcrow">¶</a></p>
+<p id="section-5-10">When reviewing registration requests, the designated expert(s) cannot use a
+status of "insecure" or "provisional" as grounds for rejection.<a href="#section-5-10" class="pilcrow">¶</a></p>
+<p id="section-5-11">Requests to update or change the fields in an existing registration are
+permitted. For example, this could allow for the transition of an algorithm
+status from "standard" to "insecure" as the security environment evolves.<a href="#section-5-11" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security">
@@ -1928,14 +1894,14 @@ processing of invalid data.<a href="#section-6.4-2" class="pilcrow">¶</a></p>
 the whole payload before sending a message (e.g. see <span>[<a href="#I-D.thomson-http-mice" class="cite xref">I-D.thomson-http-mice</a>]</span>).<a href="#section-6.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="usage-with-encryption">
+<div id="variations-within-content-encoding">
 <section id="section-6.5">
-        <h3 id="name-usage-with-encryption">
-<a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-usage-with-encryption" class="section-name selfRef">Usage with Encryption</a>
+        <h3 id="name-variations-within-content-e">
+<a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-variations-within-content-e" class="section-name selfRef">Variations Within Content Encoding</a>
         </h3>
-<p id="section-6.5-1">The checksum of an encrypted payload can change between different messages
-depending on the encryption algorithm used; in those cases its value could not be used to provide
-a proof of integrity "at rest" unless the whole (e.g. encoded) content is persisted.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
+<p id="section-6.5-1">Content coding mechanisms can support different encoding parameters, meaning that the same input content can produce different outputs. For example, GZIP supports mulitple compression levels. Such encoding parameters are generally not communicated as representation metadata, for instance different compression levels would all use the same "Content-Encoding: gzip" field. Other examples include where encoding relies on nonces or timestamps, such as the aes128gcm content coding defined <span>[<a href="#RFC8188" class="cite xref">RFC8188</a>]</span>.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
+<p id="section-6.5-2">Since it is possible for there to be variation within content coding, the checksum conveyed by the integrity field cannot be used to provide a proof of integrity "at rest"
+unless the whole (e.g. encoded) content is persisted.<a href="#section-6.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-agility">
@@ -1947,26 +1913,17 @@ a proof of integrity "at rest" unless the whole (e.g. encoded) content is persis
 Algorithm Agility (see <span>[<a href="#RFC7696" class="cite xref">RFC7696</a>]</span>) is achieved by providing implementations with flexibility
 to choose hashing algorithms from the IANA Hash Algorithms for HTTP Digest Fields registry; see
 <a href="#establish-hash-algorithm-registry" class="auto internal xref">Section 7.2</a>.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
-<p id="section-6.6-2">The "standard" algorithms listed in this document are suitable for many purposes,
-including adversarial situations where hash functions might need
-to provide resistance to collision, first-preimage and second-preimage attacks.
-Algorithms listed as "insecure" either provide none of these properties,
-or are known to be weak (see <span>[<a href="#NO-MD5" class="cite xref">NO-MD5</a>]</span> and <span>[<a href="#NO-SHA" class="cite xref">NO-SHA</a>]</span>).<a href="#section-6.6-2" class="pilcrow">¶</a></p>
-<p id="section-6.6-3">For adversarial situations, which of the "standard" algorithms are acceptable
-will depend on the level of protection the circumstances demand.
-As there is no negotiation, endpoints that depend on a digest for security
-will be vulnerable to attacks on the weakest algorithm they are willing to accept.<a href="#section-6.6-3" class="pilcrow">¶</a></p>
-<p id="section-6.6-4">Transition from weak algorithms is supported
+<p id="section-6.6-2">Transition from weak algorithms is supported
 by negotiation of hashing algorithm using <code>Want-Content-Digest</code> or <code>Want-Repr-Digest</code> (see <a href="#want-fields" class="auto internal xref">Section 4</a>)
 or by sending multiple digests from which the receiver chooses.
 Endpoints are advised that sending multiple values consumes resources,
-which may be wasted if the receiver ignores them (see <a href="#representation-digest" class="auto internal xref">Section 3</a>).<a href="#section-6.6-4" class="pilcrow">¶</a></p>
-<p id="section-6.6-5">While algorithm agility allows the migration to stronger algorithms
+which may be wasted if the receiver ignores them (see <a href="#representation-digest" class="auto internal xref">Section 3</a>).<a href="#section-6.6-2" class="pilcrow">¶</a></p>
+<p id="section-6.6-3">While algorithm agility allows the migration to stronger algorithms
 it does not prevent the use of weaker algorithms.
-Integrity fields do not provide any mitigiations for downgrade or substitution
+Integrity fields do not provide any mitigations for downgrade or substitution
 attacks (see Section 1 of <span>[<a href="#RFC6211" class="cite xref">RFC6211</a>]</span>) of the hashing algorithm.
 To protect against such attacks, endpoints could restrict their set of supported algorithms
-to stronger ones and protect the fields value by using TLS and/or digital signatures.<a href="#section-6.6-5" class="pilcrow">¶</a></p>
+to stronger ones and protect the fields value by using TLS and/or digital signatures.<a href="#section-6.6-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="resource-exhaustion">
@@ -1994,8 +1951,8 @@ validation of the algorithm types, number of validations, or the size of content
 <p id="section-7.1-1">IANA is asked to update the
 "Hypertext Transfer Protocol (HTTP) Field Name Registry" registry
 (<span>[<a href="#RFC9110" class="cite xref">HTTP</a>]</span>) according to the table below:<a href="#section-7.1-1" class="pilcrow">¶</a></p>
-<table class="center" id="table-2">
-          <caption><a href="#table-2" class="selfRef">Table 2</a></caption>
+<table class="center" id="table-1">
+          <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
 <thead>
             <tr>
               <th class="text-left" rowspan="1" colspan="1">Field Name</th>
@@ -2049,11 +2006,96 @@ validation of the algorithm types, number of validations, or the size of content
         <h3 id="name-establish-the-hash-algorith">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-establish-the-hash-algorith" class="section-name selfRef">Establish the Hash Algorithms for HTTP Digest Fields Registry</a>
         </h3>
-<p id="section-7.2-1">This memo sets this specification to be the establishing document for the
-<a href="https://www.iana.org/assignments/http-structured-dig-alg/">Hash Algorithms for HTTP Digest Fields</a>
-registry defined in <a href="#algorithms" class="auto internal xref">Section 5</a>.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.2-2">IANA is asked to initialize the registry with the entries in
-<a href="#iana-hash-algorithm-table" class="auto internal xref">Table 1</a>.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
+<p id="section-7.2-1">IANA is requested to create the new "Hash Algorithms for HTTP Digest Fields"
+registry at <a href="https://www.iana.org/assignments/http-digest-hash-alg/">https://www.iana.org/assignments/http-digest-hash-alg/</a> and
+populate it with the entries in <a href="#iana-hash-algorithm-table" class="auto internal xref">Table 2</a>. The procedure for
+new registrations is provided in <a href="#algorithms" class="auto internal xref">Section 5</a>.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<span id="name-initial-hash-algorithms"></span><div id="iana-hash-algorithm-table">
+<table class="center" id="table-2">
+          <caption>
+<a href="#table-2" class="selfRef">Table 2</a>:
+<a href="#name-initial-hash-algorithms" class="selfRef">Initial Hash Algorithms</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Algorithm Key</th>
+              <th class="text-left" rowspan="1" colspan="1">Status</th>
+              <th class="text-left" rowspan="1" colspan="1">Description</th>
+              <th class="text-left" rowspan="1" colspan="1">Reference(s)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">sha-512</td>
+              <td class="text-left" rowspan="1" colspan="1">standard</td>
+              <td class="text-left" rowspan="1" colspan="1">The SHA-512 algorithm.</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span>, <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, this document.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">sha-256</td>
+              <td class="text-left" rowspan="1" colspan="1">standard</td>
+              <td class="text-left" rowspan="1" colspan="1">The SHA-256 algorithm.</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span>, <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, this document.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">md5</td>
+              <td class="text-left" rowspan="1" colspan="1">insecure</td>
+              <td class="text-left" rowspan="1" colspan="1">The MD5 algorithm. It is vulnerable to collision attacks; see <span>[<a href="#NO-MD5" class="cite xref">NO-MD5</a>]</span> and <span>[<a href="#CMU-836068" class="cite xref">CMU-836068</a>]</span>
+</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC1321" class="cite xref">RFC1321</a>]</span>, <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, this document.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">sha</td>
+              <td class="text-left" rowspan="1" colspan="1">insecure</td>
+              <td class="text-left" rowspan="1" colspan="1">The SHA-1 algorithm. It is vulnerable to collision attacks; see <span>[<a href="#NO-SHA" class="cite xref">NO-SHA</a>]</span> and <span>[<a href="#IACR-2020-014" class="cite xref">IACR-2020-014</a>]</span>
+</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC3174" class="cite xref">RFC3174</a>]</span>, <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span> this document.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">unixsum</td>
+              <td class="text-left" rowspan="1" colspan="1">insecure</td>
+              <td class="text-left" rowspan="1" colspan="1">The algorithm used by the UNIX "sum" command.</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span>, <span>[<a href="#UNIX" class="cite xref">UNIX</a>]</span>, this document.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">unixcksum</td>
+              <td class="text-left" rowspan="1" colspan="1">insecure</td>
+              <td class="text-left" rowspan="1" colspan="1">The algorithm used by the UNIX "cksum" command.</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span>, <span>[<a href="#UNIX" class="cite xref">UNIX</a>]</span>, this document.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">adler</td>
+              <td class="text-left" rowspan="1" colspan="1">insecure</td>
+              <td class="text-left" rowspan="1" colspan="1">The ADLER32 algorithm.</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC1950" class="cite xref">RFC1950</a>]</span>, this document.</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">crc32c</td>
+              <td class="text-left" rowspan="1" colspan="1">insecure</td>
+              <td class="text-left" rowspan="1" colspan="1">The CRC32c algorithm.</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC9260" class="cite xref">RFC9260</a>]</span> appendix B, this document.</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+</section>
+</div>
+<div id="deprecate-the-hypertext-transfer-protocol-http-digest-algorithm-values-registry">
+<section id="section-7.3">
+        <h3 id="name-deprecate-the-hypertext-tra">
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-deprecate-the-hypertext-tra" class="section-name selfRef">Deprecate the Hypertext Transfer Protocol (HTTP) Digest Algorithm Values Registry</a>
+        </h3>
+<p id="section-7.3-1">IANA is requested to deprecate the "Hypertext Transfer Protocol (HTTP) Digest
+Algorithm Values" registry at
+<a href="https://www.iana.org/assignments/http-dig-alg/http-dig-alg.xhtml">https://www.iana.org/assignments/http-dig-alg/http-dig-alg.xhtml</a>.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2178,6 +2220,10 @@ registry defined in <a href="#algorithms" class="auto internal xref">Section 5</
         <dd>
 <span class="refAuthor">Nottingham, M.</span> and <span class="refAuthor">E. Wilde</span>, <span class="refTitle">"Problem Details for HTTP APIs"</span>, <span class="seriesInfo">RFC 7807</span>, <span class="seriesInfo">DOI 10.17487/RFC7807</span>, <time datetime="2016-03" class="refDate">March 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7807">https://www.rfc-editor.org/rfc/rfc7807</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8188">[RFC8188]</dt>
+        <dd>
+<span class="refAuthor">Thomson, M.</span>, <span class="refTitle">"Encrypted Content-Encoding for HTTP"</span>, <span class="seriesInfo">RFC 8188</span>, <span class="seriesInfo">DOI 10.17487/RFC8188</span>, <time datetime="2017-06" class="refDate">June 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8188">https://www.rfc-editor.org/rfc/rfc8188</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC9260">[RFC9260]</dt>
         <dd>
 <span class="refAuthor">Stewart, R.</span>, <span class="refAuthor">Tüxen, M.</span>, and <span class="refAuthor">K. Nielsen</span>, <span class="refTitle">"Stream Control Transmission Protocol"</span>, <span class="seriesInfo">RFC 9260</span>, <span class="seriesInfo">DOI 10.17487/RFC9260</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9260">https://www.rfc-editor.org/rfc/rfc9260</a>&gt;</span>. </dd>
@@ -2230,10 +2276,10 @@ Host: foo.example
 Content-Type: application/json
 Content-Encoding: gzip
 
-0x1F0x8B0x080x000xA50xB40xBD0x620x020xFF\
-0xAB0x560x4A0x540xB20x520x500x320xA40x03\
-0x500xAA0x050x000x440x470x2A0x7C0x6D0x00\
-0x000x00
+1F 8B 08 00 A5 B4 BD 62 02 FF
+AB 56 4A 54 B2 52 50 32 A4 03
+50 AA 05 00 44 47 2A 7C 6D 00
+00 00
 </pre>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
@@ -2247,16 +2293,14 @@ In this case, the server can reply with an error.<a href="#appendix-A-5" class="
 <span id="name-request-containing-malforme"></span><figure id="figure-3">
         <div class="lang-http-message sourcecode" id="appendix-A-6.1">
 <pre>
-NOTE: '\' line wrapping per RFC 8792
-
 PUT /entries/1234 HTTP/1.1
 Host: foo.example
 Content-Type: application/json
 
-0x1F0x8B0x080x000xA50xB40xBD0x620x020xFF\
-0xAB0x560x4A0x540xB20x520x500x320xA40x03\
-0x500xAA0x050x000x440x470x2A0x7C0x6D0x00\
-0x000x00
+1F 8B 08 00 A5 B4 BD 62 02 FF
+AB 56 4A 54 B2 52 50 32 A4 03
+50 AA 05 00 44 47 2A 7C 6D 00
+00 00
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
@@ -2295,7 +2339,7 @@ Content-Encoding: gzip
 Content-Type: application/json
 Content-Range: bytes 0-10/32
 
-0x1F0x8B0x080x000xA50xB40xBD0x620x020xFF
+1F 8B 08 00 A5 B4 BD 62 02 FF
 </pre>
 </div>
 <figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
@@ -2569,9 +2613,9 @@ Content-Length: 22
 Repr-Digest: \
   sha-256=:4REjxQ4yrqUVicfSKYNO/cF9zNj5ANbzgDZt3/h3Qxo=:
 
-0x8B0x080x800x7B0x220x680x650x6C0x6C0x6F\
-0x220x3A0x200x220x770x6F0x720x6C0x640x22\
-0x7D0x03
+8B 08 80 7B 22 68 65 6C 6C 6F
+22 3A 20 22 77 6F 72 6C 64 22
+7D 03
 </pre>
 </div>
 <figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
@@ -2658,9 +2702,9 @@ Repr-Digest: \
   sha-512=:pxo7aYzcGI88pnDnoSmAnaOEVys0MABhgvHY9+VI+ElE60jBCwnMPyA/\
   s3NF3ZO5oIWA7lf8ukk+5KJzm3p5og==:
 
-0x8B0x080x800x7B0x220x680x650x6C0x6C0x6F\
-0x220x3A0x200x220x770x6F0x720x6C0x640x22\
-0x7D0x03
+8B 08 80 7B 22 68 65 6C 6C 6F
+22 3A 20 22 77 6F 72 6C 64 22
+7D 03
 </pre>
 </div>
 <figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
@@ -2884,7 +2928,7 @@ Trailer: Digest
 2\r\n
 "}\r\n
 0\r\n
-Repr-Digest:
+Repr-Digest: \
   sha-256=:X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=:\r\n
 
 </pre>
@@ -3039,42 +3083,79 @@ Content-Type: application/problem+json
 </div>
 </section>
 </div>
-<div id="migrating-from-rfc-3230">
+<div id="sample-digest-values">
 <section id="appendix-D">
-      <h2 id="name-migrating-from-rfc-3230">
-<a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-migrating-from-rfc-3230" class="section-name selfRef">Migrating from RFC 3230</a>
+      <h2 id="name-sample-digest-values">
+<a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-sample-digest-values" class="section-name selfRef">Sample Digest Values</a>
       </h2>
-<p id="appendix-D-1">HTTP digests are computed by applying a hashing algorithm to input data.
+<p id="appendix-D-1">This section shows examples of digest values for different hashing algorithms.
+The input value is the JSON object <code>{"hello": "world"}</code>. The digest values are
+each produced by running the relevant hashing algorithm over the input and
+running the output bytes through <code>Byte Sequence</code> serialization; see <span><a href="https://rfc-editor.org/rfc/rfc8941#section-4.1.8" class="relref">Section 4.1.8</a> of [<a href="#STRUCTURED-FIELDS" class="cite xref">STRUCTURED-FIELDS</a>]</span>.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-D-2">
+<pre>
+NOTE: '\' line wrapping per RFC 8792
+
+sha-512 -   :WZDPaVn/7XgHaAy8pmojAkGWoRx2UFChF41A2svX+TaPm+\
+            AbwAgBWnrIiYllu7BNNyealdVLvRwEmTHWXvJwew==:
+
+sha-256 -   :X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=:
+
+md5 -       :Sd/dVLAcvNLSq16eXua5uQ==:
+
+sha -       :07CavjDP4u3/TungoUHJO/Wzr4c=:
+
+unixsum -   :GQU=:
+
+unixcksum - :7zsHAA==:
+
+adler -     :OZkGFw==:
+
+crc32c -    :Q3lHIA==:
+</pre><a href="#appendix-D-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="migrating-from-rfc-3230">
+<section id="appendix-E">
+      <h2 id="name-migrating-from-rfc-3230">
+<a href="#appendix-E" class="section-number selfRef">Appendix E. </a><a href="#name-migrating-from-rfc-3230" class="section-name selfRef">Migrating from RFC 3230</a>
+      </h2>
+<p id="appendix-E-1">HTTP digests are computed by applying a hashing algorithm to input data.
 RFC 3230 defined the input data as an "instance", a term it also defined.
 The concept of instance has since been superseded by the HTTP semantic term "representation".
 It is understood that some implementations of RFC 3230
 mistook "instance" to mean HTTP content.
 Using content for the Digest field is an error
-that leads to interoperability problems between peers that implement RFC 3230.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
-<p id="appendix-D-2">RFC 3230 was only ever intended
+that leads to interoperability problems between peers that implement RFC 3230.<a href="#appendix-E-1" class="pilcrow">¶</a></p>
+<p id="appendix-E-2">RFC 3230 was only ever intended
 to use what HTTP now defines as selected representation data.
 The semantic concept of digest and representation are explained
-alongside the definition of <span><a href="#representation-digest" class="internal xref">the Repr-Digest field</a> (<a href="#representation-digest" class="auto internal xref">Section 3</a>)</span>.<a href="#appendix-D-2" class="pilcrow">¶</a></p>
-<p id="appendix-D-3">While the syntax of Digest and Repr-Digest are different,
+alongside the definition of <span><a href="#representation-digest" class="internal xref">the Repr-Digest field</a> (<a href="#representation-digest" class="auto internal xref">Section 3</a>)</span>.<a href="#appendix-E-2" class="pilcrow">¶</a></p>
+<p id="appendix-E-3">While the syntax of Digest and Repr-Digest are different,
 the considerations and examples this document gives for Repr-Digest
 apply equally to Digest because they operate on the same input data;
-see <a href="#state-changing-requests" class="auto internal xref">Section 3.1</a>, <a href="#security" class="auto internal xref">Section 6</a> and <a href="#usage-in-signatures" class="auto internal xref">Section 6.3</a>.<a href="#appendix-D-3" class="pilcrow">¶</a></p>
-<p id="appendix-D-4">RFC 3230 could never communicate
+see <a href="#state-changing-requests" class="auto internal xref">Section 3.1</a>, <a href="#security" class="auto internal xref">Section 6</a> and <a href="#usage-in-signatures" class="auto internal xref">Section 6.3</a>.<a href="#appendix-E-3" class="pilcrow">¶</a></p>
+<p id="appendix-E-4">RFC 3230 could never communicate
 the digest of HTTP message content in the Digest field;
-Content-Digest now provides that capability.<a href="#appendix-D-4" class="pilcrow">¶</a></p>
+Content-Digest now provides that capability.<a href="#appendix-E-4" class="pilcrow">¶</a></p>
+<p id="appendix-E-5">RFC 3230 allowed algorithms to define their output encoding format for use with
+the Digest field. This resulted in a mixed of formats such as base64, hex or
+decimal. By virtue of using Structured fields, Content-Digest and Repr-Digest
+use only a single encoding format. Further explanation and examples are provided in <a href="#sample-digest-values" class="auto internal xref">Appendix D</a>.<a href="#appendix-E-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="acknowledgements">
-<section id="appendix-E">
+<section id="appendix-F">
       <h2 id="name-acknowledgements">
 <a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
-<p id="appendix-E-1">This document is based on ideas from <span>[<a href="#RFC3230" class="cite xref">RFC3230</a>]</span>, so thanks
+<p id="appendix-F-1">This document is based on ideas from <span>[<a href="#RFC3230" class="cite xref">RFC3230</a>]</span>, so thanks
 to Jeff Mogul and Arthur Van Hoff for their great work.
 The original idea of refreshing RFC3230 arose from an interesting
 discussion with Mark Nottingham, Jeffrey Yasskin and Martin Thomson when reviewing
-the MICE content coding.<a href="#appendix-E-1" class="pilcrow">¶</a></p>
-<p id="appendix-E-2">Thanks to Julian Reschke for his valuable contributions to this document,
+the MICE content coding.<a href="#appendix-F-1" class="pilcrow">¶</a></p>
+<p id="appendix-F-2">Thanks to Julian Reschke for his valuable contributions to this document,
 and to the following contributors that have helped improve this specification by reporting bugs,
 asking smart questions, drafting or reviewing text, and evaluating open issues:
 Mike Bishop,
@@ -3084,22 +3165,22 @@ James Manger,
 Tommy Pauly,
 Sean Turner,
 Justin Richer,
-and Erik Wilde.<a href="#appendix-E-2" class="pilcrow">¶</a></p>
+and Erik Wilde.<a href="#appendix-F-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="code-samples">
-<section id="appendix-F">
+<section id="appendix-G">
       <h2 id="name-code-samples">
 <a href="#name-code-samples" class="section-name selfRef">Code Samples</a>
       </h2>
-<p id="appendix-F-1">This section is to be removed before publishing as an RFC.<a href="#appendix-F-1" class="pilcrow">¶</a></p>
-<p id="appendix-F-2">How can I generate and validate the <code>Repr-Digest</code> values shown in the examples
-throughout this document?<a href="#appendix-F-2" class="pilcrow">¶</a></p>
-<p id="appendix-F-3">The following python3 code can be used to generate digests for JSON objects
+<p id="appendix-G-1">This section is to be removed before publishing as an RFC.<a href="#appendix-G-1" class="pilcrow">¶</a></p>
+<p id="appendix-G-2">How can I generate and validate the <code>Repr-Digest</code> values shown in the examples
+throughout this document?<a href="#appendix-G-2" class="pilcrow">¶</a></p>
+<p id="appendix-G-3">The following python3 code can be used to generate digests for JSON objects
 using SHA algorithms for a range of encodings. Note that these are formatted as
 base64. This function could be adapted to other algorithms and should take into
-account their specific formatting rules.<a href="#appendix-F-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-F-4">
+account their specific formatting rules.<a href="#appendix-G-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-G-4">
 <pre>
 import base64, json, hashlib, brotli, logging
 log = logging.getLogger()
@@ -3141,175 +3222,197 @@ print("Brotli | sha512 |", digest(item, algorithm=hashlib.sha512,
 # Brotli | sha512 | b'pxo7aYzcGI88pnDnoSmAnaOEVys0MABhgvHY9+VI+ElE6'
 #                   '0jBCwnMPyA/s3NF3ZO5oIWA7lf8ukk+5KJzm3p5og=='
 
-</pre><a href="#appendix-F-4" class="pilcrow">¶</a>
+</pre><a href="#appendix-G-4" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="changes">
-<section id="appendix-G">
+<section id="appendix-H">
       <h2 id="name-changes">
 <a href="#name-changes" class="section-name selfRef">Changes</a>
       </h2>
-<p id="appendix-G-1">This section is to be removed before publishing as an RFC.<a href="#appendix-G-1" class="pilcrow">¶</a></p>
-<div id="since-draft-ietf-httpbis-digest-headers-08">
-<section id="appendix-G.1">
+<p id="appendix-H-1">This section is to be removed before publishing as an RFC.<a href="#appendix-H-1" class="pilcrow">¶</a></p>
+<div id="since-draft-ietf-httpbis-digest-headers-10">
+<section id="appendix-H.1">
         <h3 id="name-since-draft-ietf-httpbis-di">
-<a href="#name-since-draft-ietf-httpbis-di" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-08</a>
+<a href="#name-since-draft-ietf-httpbis-di" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-10</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-G.1-1.1">Add note about migrating from RFC 3230. #1968, #1971<a href="#appendix-G.1-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-H.1-1.1">Editorial or minor changes<a href="#appendix-H.1-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.1-1.2">Clarify what Want-* means in responses. #2097<a href="#appendix-G.1-1.2" class="pilcrow">¶</a>
+        </ul>
+</section>
+</div>
+<div id="since-draft-ietf-httpbis-digest-headers-09">
+<section id="appendix-H.2">
+        <h3 id="name-since-draft-ietf-httpbis-dig">
+<a href="#name-since-draft-ietf-httpbis-dig" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-09</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-H.2-1.1">Editorial or minor changes<a href="#appendix-H.2-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.1-1.3">Editorial changes to structure and to align to HTTP style guide.<a href="#appendix-G.1-1.3" class="pilcrow">¶</a>
+        </ul>
+</section>
+</div>
+<div id="since-draft-ietf-httpbis-digest-headers-08">
+<section id="appendix-H.3">
+        <h3 id="name-since-draft-ietf-httpbis-dige">
+<a href="#name-since-draft-ietf-httpbis-dige" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-08</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-H.3-1.1">Add note about migrating from RFC 3230. #1968, #1971<a href="#appendix-H.3-1.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-H.3-1.2">Clarify what Want-* means in responses. #2097<a href="#appendix-H.3-1.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-H.3-1.3">Editorial changes to structure and to align to HTTP style guide.<a href="#appendix-H.3-1.3" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-httpbis-digest-headers-07">
-<section id="appendix-G.2">
-        <h3 id="name-since-draft-ietf-httpbis-dig">
-<a href="#name-since-draft-ietf-httpbis-dig" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-07</a>
+<section id="appendix-H.4">
+        <h3 id="name-since-draft-ietf-httpbis-diges">
+<a href="#name-since-draft-ietf-httpbis-diges" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-07</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-G.2-1.1">Introduced Repr-Digest and Want-Repr-Digest, and deprecated
-Digest and Want-Digest. Use of Structured Fields. #1993, #1919<a href="#appendix-G.2-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-H.4-1.1">Introduced Repr-Digest and Want-Repr-Digest, and deprecated
+Digest and Want-Digest. Use of Structured Fields. #1993, #1919<a href="#appendix-H.4-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.2-1.2">IANA refactoring. #1983<a href="#appendix-G.2-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.4-1.2">IANA refactoring. #1983<a href="#appendix-H.4-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.2-1.3">No normative text in security considerations. #1972<a href="#appendix-G.2-1.3" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.4-1.3">No normative text in security considerations. #1972<a href="#appendix-H.4-1.3" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-httpbis-digest-headers-06">
-<section id="appendix-G.3">
-        <h3 id="name-since-draft-ietf-httpbis-dige">
-<a href="#name-since-draft-ietf-httpbis-dige" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-06</a>
+<section id="appendix-H.5">
+        <h3 id="name-since-draft-ietf-httpbis-digest">
+<a href="#name-since-draft-ietf-httpbis-digest" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-06</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-G.3-1.1">Remove id-sha-256 and id-sha-512 from the list of supported algorithms #855<a href="#appendix-G.3-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-H.5-1.1">Remove id-sha-256 and id-sha-512 from the list of supported algorithms #855<a href="#appendix-H.5-1.1" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-httpbis-digest-headers-05">
-<section id="appendix-G.4">
-        <h3 id="name-since-draft-ietf-httpbis-diges">
-<a href="#name-since-draft-ietf-httpbis-diges" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-05</a>
+<section id="appendix-H.6">
+        <h3 id="name-since-draft-ietf-httpbis-digest-">
+<a href="#name-since-draft-ietf-httpbis-digest-" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-05</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-G.4-1.1">Reboot digest-algorithm values registry #1567<a href="#appendix-G.4-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-H.6-1.1">Reboot digest-algorithm values registry #1567<a href="#appendix-H.6-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.4-1.2">Add Content-Digest #1542<a href="#appendix-G.4-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.6-1.2">Add Content-Digest #1542<a href="#appendix-H.6-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.4-1.3">Remove SRI section #1478<a href="#appendix-G.4-1.3" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.6-1.3">Remove SRI section #1478<a href="#appendix-H.6-1.3" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-httpbis-digest-headers-04">
-<section id="appendix-G.5">
-        <h3 id="name-since-draft-ietf-httpbis-digest">
-<a href="#name-since-draft-ietf-httpbis-digest" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-04</a>
+<section id="appendix-H.7">
+        <h3 id="name-since-draft-ietf-httpbis-digest-h">
+<a href="#name-since-draft-ietf-httpbis-digest-h" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-04</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-G.5-1.1">Improve SRI section #1354<a href="#appendix-G.5-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-H.7-1.1">Improve SRI section #1354<a href="#appendix-H.7-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.5-1.2">About duplicate digest-algorithms #1221<a href="#appendix-G.5-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.7-1.2">About duplicate digest-algorithms #1221<a href="#appendix-H.7-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.5-1.3">Improve security considerations #852<a href="#appendix-G.5-1.3" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.7-1.3">Improve security considerations #852<a href="#appendix-H.7-1.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.5-1.4">md5 and sha deprecation references #1392<a href="#appendix-G.5-1.4" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.7-1.4">md5 and sha deprecation references #1392<a href="#appendix-H.7-1.4" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.5-1.5">Obsolete 3230 #1395<a href="#appendix-G.5-1.5" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.7-1.5">Obsolete 3230 #1395<a href="#appendix-H.7-1.5" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.5-1.6">Editorial #1362<a href="#appendix-G.5-1.6" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.7-1.6">Editorial #1362<a href="#appendix-H.7-1.6" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-httpbis-digest-headers-03">
-<section id="appendix-G.6">
-        <h3 id="name-since-draft-ietf-httpbis-digest-">
-<a href="#name-since-draft-ietf-httpbis-digest-" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-03</a>
+<section id="appendix-H.8">
+        <h3 id="name-since-draft-ietf-httpbis-digest-he">
+<a href="#name-since-draft-ietf-httpbis-digest-he" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-03</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-G.6-1.1">Reference semantics-12<a href="#appendix-G.6-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-H.8-1.1">Reference semantics-12<a href="#appendix-H.8-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.6-1.2">Detail encryption quirks<a href="#appendix-G.6-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.8-1.2">Detail encryption quirks<a href="#appendix-H.8-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.6-1.3">Details on Algorithm agility #1250<a href="#appendix-G.6-1.3" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.8-1.3">Details on Algorithm agility #1250<a href="#appendix-H.8-1.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.6-1.4">Obsolete parameters #850<a href="#appendix-G.6-1.4" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.8-1.4">Obsolete parameters #850<a href="#appendix-H.8-1.4" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-httpbis-digest-headers-02">
-<section id="appendix-G.7">
-        <h3 id="name-since-draft-ietf-httpbis-digest-h">
-<a href="#name-since-draft-ietf-httpbis-digest-h" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-02</a>
+<section id="appendix-H.9">
+        <h3 id="name-since-draft-ietf-httpbis-digest-hea">
+<a href="#name-since-draft-ietf-httpbis-digest-hea" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-02</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-G.7-1.1">Deprecate SHA-1 #1154<a href="#appendix-G.7-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-H.9-1.1">Deprecate SHA-1 #1154<a href="#appendix-H.9-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.7-1.2">Avoid id-* with encrypted content<a href="#appendix-G.7-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.9-1.2">Avoid id-* with encrypted content<a href="#appendix-H.9-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.7-1.3">Digest is independent from MESSAGING and HTTP/1.1 is not normative #1215<a href="#appendix-G.7-1.3" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.9-1.3">Digest is independent from MESSAGING and HTTP/1.1 is not normative #1215<a href="#appendix-H.9-1.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.7-1.4">Identity is not a valid field value for content-encoding #1223<a href="#appendix-G.7-1.4" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.9-1.4">Identity is not a valid field value for content-encoding #1223<a href="#appendix-H.9-1.4" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.7-1.5">Mention trailers #1157<a href="#appendix-G.7-1.5" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.9-1.5">Mention trailers #1157<a href="#appendix-H.9-1.5" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.7-1.6">Reference httpbis-semantics #1156<a href="#appendix-G.7-1.6" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.9-1.6">Reference httpbis-semantics #1156<a href="#appendix-H.9-1.6" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.7-1.7">Add contentMD5 as an obsoleted digest-algorithm #1249<a href="#appendix-G.7-1.7" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.9-1.7">Add contentMD5 as an obsoleted digest-algorithm #1249<a href="#appendix-H.9-1.7" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.7-1.8">Use lowercase digest-algorithms names in the doc and in the digest-algorithm IANA table.<a href="#appendix-G.7-1.8" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.9-1.8">Use lowercase digest-algorithms names in the doc and in the digest-algorithm IANA table.<a href="#appendix-H.9-1.8" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-httpbis-digest-headers-01">
-<section id="appendix-G.8">
-        <h3 id="name-since-draft-ietf-httpbis-digest-he">
-<a href="#name-since-draft-ietf-httpbis-digest-he" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-01</a>
+<section id="appendix-H.10">
+        <h3 id="name-since-draft-ietf-httpbis-digest-hea-2">
+<a href="#name-since-draft-ietf-httpbis-digest-hea-2" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-01</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-G.8-1.1">Digest of error responses is computed on the error representation-data #1004<a href="#appendix-G.8-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-H.10-1.1">Digest of error responses is computed on the error representation-data #1004<a href="#appendix-H.10-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.8-1.2">Effect of HTTP semantics on payload and message body moved to appendix #1122<a href="#appendix-G.8-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.10-1.2">Effect of HTTP semantics on payload and message body moved to appendix #1122<a href="#appendix-H.10-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.8-1.3">Editorial refactoring, moving headers sections up. #1109-#1112, #1116,
-#1117, #1122-#1124<a href="#appendix-G.8-1.3" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.10-1.3">Editorial refactoring, moving headers sections up. #1109-#1112, #1116,
+#1117, #1122-#1124<a href="#appendix-H.10-1.3" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-httpbis-digest-headers-00">
-<section id="appendix-G.9">
-        <h3 id="name-since-draft-ietf-httpbis-digest-hea">
-<a href="#name-since-draft-ietf-httpbis-digest-hea" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-00</a>
+<section id="appendix-H.11">
+        <h3 id="name-since-draft-ietf-httpbis-digest-hea-3">
+<a href="#name-since-draft-ietf-httpbis-digest-hea-3" class="section-name selfRef">Since draft-ietf-httpbis-digest-headers-00</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-G.9-1.1">Align title with document name<a href="#appendix-G.9-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-H.11-1.1">Align title with document name<a href="#appendix-H.11-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.9-1.2">Add id-sha-* algorithm examples #880<a href="#appendix-G.9-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.11-1.2">Add id-sha-* algorithm examples #880<a href="#appendix-H.11-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.9-1.3">Reference <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span> and <span>[<a href="#RFC3174" class="cite xref">RFC3174</a>]</span> instead of FIPS-1<a href="#appendix-G.9-1.3" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.11-1.3">Reference <span>[<a href="#RFC6234" class="cite xref">RFC6234</a>]</span> and <span>[<a href="#RFC3174" class="cite xref">RFC3174</a>]</span> instead of FIPS-1<a href="#appendix-H.11-1.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.9-1.4">Deprecate MD5<a href="#appendix-G.9-1.4" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.11-1.4">Deprecate MD5<a href="#appendix-H.11-1.4" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.9-1.5">Obsolete ADLER-32 but don't forbid it #828<a href="#appendix-G.9-1.5" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.11-1.5">Obsolete ADLER-32 but don't forbid it #828<a href="#appendix-H.11-1.5" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.9-1.6">Update CRC32C value in IANA table #828<a href="#appendix-G.9-1.6" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.11-1.6">Update CRC32C value in IANA table #828<a href="#appendix-H.11-1.6" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.9-1.7">Use when acting on resources (POST, PATCH) #853<a href="#appendix-G.9-1.7" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.11-1.7">Use when acting on resources (POST, PATCH) #853<a href="#appendix-H.11-1.7" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.9-1.8">Added Relationship with SRI, draft Use Cases #868, #971<a href="#appendix-G.9-1.8" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.11-1.8">Added Relationship with SRI, draft Use Cases #868, #971<a href="#appendix-H.11-1.8" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-G.9-1.9">Warn about the implications of <code>Content-Location</code><a href="#appendix-G.9-1.9" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-H.11-1.9">Warn about the implications of <code>Content-Location</code><a href="#appendix-H.11-1.9" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
@@ -3317,7 +3420,7 @@ Digest and Want-Digest. Use of Structured Fields. #1993, #1919<a href="#appendix
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-H">
+<section id="appendix-I">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>

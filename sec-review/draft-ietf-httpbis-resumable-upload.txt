@@ -5,10 +5,10 @@
 HTTP                                                      M. Kleidl, Ed.
 Internet-Draft                                           Transloadit Ltd
 Intended status: Standards Track                           G. Zhang, Ed.
-Expires: 2 September 2023                                     Apple Inc.
+Expires: 4 September 2023                                     Apple Inc.
                                                           L. Pardue, Ed.
                                                               Cloudflare
-                                                            1 March 2023
+                                                            3 March 2023
 
 
                        Resumable Uploads for HTTP
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 September 2023.
+   This Internet-Draft will expire on 4 September 2023.
 
 Copyright Notice
 
@@ -94,9 +94,11 @@ Table of Contents
    11. Security Considerations
    12. IANA Considerations
    13. Normative References
-   Appendix A.  Since draft-tus-httpbis-resumable-uploads-protocol-02
-     A.1.  Since draft-tus-httpbis-resumable-uploads-protocol-01
-     A.2.  Since draft-tus-httpbis-resumable-uploads-protocol-00
+   Appendix A.  Since draft-ietf-httpbis-resumable-upload-01
+     A.1.  Since draft-ietf-httpbis-resumable-upload-00
+     A.2.  Since draft-tus-httpbis-resumable-uploads-protocol-02
+     A.3.  Since draft-tus-httpbis-resumable-uploads-protocol-01
+     A.4.  Since draft-tus-httpbis-resumable-uploads-protocol-00
    Appendix B.  Informational Response
    Appendix C.  Feature Detection
    Appendix D.  Upload Metadata
@@ -377,6 +379,7 @@ Table of Contents
    :authority: example.com
    :path: /upload
    upload-draft-interop-version: 3
+   upload-incomplete: ?0
    content-length: 100
    [content (100 bytes)]
 
@@ -777,7 +780,11 @@ Table of Contents
               HTTP", RFC 8941, DOI 10.17487/RFC8941, February 2021,
               <https://www.rfc-editor.org/rfc/rfc8941>.
 
-Appendix A.  Since draft-tus-httpbis-resumable-uploads-protocol-02
+Appendix A.  Since draft-ietf-httpbis-resumable-upload-01
+
+   None yet
+
+A.1.  Since draft-ietf-httpbis-resumable-upload-00
 
    *  Remove Upload-Token and instead use Server-generated upload URL
       for upload identification.
@@ -787,14 +794,18 @@ Appendix A.  Since draft-tus-httpbis-resumable-uploads-protocol-02
 
    *  Increase the draft interop version.
 
-A.1.  Since draft-tus-httpbis-resumable-uploads-protocol-01
+A.2.  Since draft-tus-httpbis-resumable-uploads-protocol-02
+
+   None
+
+A.3.  Since draft-tus-httpbis-resumable-uploads-protocol-01
 
    *  Clarifying backtracking and preventing skipping ahead during the
       Offset Receiving Procedure.
 
    *  Clients auto-retry 404 is no longer allowed.
 
-A.2.  Since draft-tus-httpbis-resumable-uploads-protocol-00
+A.4.  Since draft-tus-httpbis-resumable-uploads-protocol-00
 
    *  Split the Upload Transfer Procedure into the Upload Creation
       Procedure and the Upload Appending Procedure.

@@ -1,4 +1,4 @@
-# Editor's drafts for sign-signature branch of [httpwg/http-extensions](https://github.com/httpwg/http-extensions/tree/sign-signature)
+# Editor's drafts for sec-review branch of [httpwg/http-extensions](https://github.com/httpwg/http-extensions/tree/sec-review)
 
 View [saved issues](issues.html), or the latest GitHub [issues](https://github.com/httpwg/http-extensions/issues) and [pull requests](https://github.com/httpwg/http-extensions/pulls) in the [repo](https://github.com/httpwg/http-extensions).
 
