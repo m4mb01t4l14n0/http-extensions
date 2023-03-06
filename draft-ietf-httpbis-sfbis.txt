@@ -6,7 +6,7 @@ HTTP                                                       M. Nottingham
 Internet-Draft                                                Cloudflare
 Obsoletes: 8941 (if approved)                                 P.-H. Kamp
 Intended status: Standards Track               The Varnish Cache Project
-Expires: 4 September 2023                                   3 March 2023
+Expires: 7 September 2023                                   6 March 2023
 
 
                     Structured Field Values for HTTP
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 September 2023.
+   This Internet-Draft will expire on 7 September 2023.
 
 Copyright Notice
 
@@ -167,7 +167,7 @@ Table of Contents
 
    This specification intentionally defines strict parsing and
    serialization behaviors using step-by-step algorithms; the only error
-   handling defined is to fail the operation altogether.
+   handling defined is to fail the entire operation altogether.
 
    It is designed to encourage faithful implementation and good
    interoperability.  Therefore, an implementation that tried to be
@@ -236,8 +236,9 @@ Table of Contents
    most situations, violating field-specific constraints should have the
    same effect.  Thus, if a header is defined as an Item and required to
    be an Integer, but a String is received, the field will by default be
-   ignored.  If the field requires different error handling, this should
-   be explicitly specified.
+   ignored.  If the field requires different handling for type
+   mismatches it should be explicitly specified, but note that field
+   definitions cannot override how parsing failures are handled.
 
    Both Items and Inner Lists allow parameters as an extensibility
    mechanism; this means that values can later be extended to
@@ -1054,11 +1055,12 @@ Table of Contents
    Example-String: "foo
    Example-String: bar"
 
-   If parsing fails -- including when calling another algorithm -- the
-   entire field value MUST be ignored (i.e., treated as if the field
-   were not present in the section).  This is intentionally strict, to
-   improve interoperability and safety, and specifications referencing
-   this document are not allowed to loosen this requirement.
+   If parsing fails, either the entire field value MUST be ignored
+   (i.e., treated as if the field were not present in the section), or
+   alternatively the complete HTTP message MUST be treated as malformed.
+   This is intentionally strict to improve interoperability and safety,
+   and field specifications that use Structured Fields are not allowed
+   to loosen this requirement.
 
    Note that this requirement does not apply to an implementation that
    is not parsing the field; for example, an intermediary is not
@@ -1759,6 +1761,8 @@ Appendix D.  Changes from RFC 8941
 
    *  Added a "Structured Type" column to the HTTP Field Name Registry.
       (Section 5)
+
+   *  Refined parse failure handling.  (Section 4.2)
 
 Acknowledgements
 

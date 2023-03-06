@@ -1053,7 +1053,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Nottingham &amp; Kamp</td>
-<td class="center">Expires 4 September 2023</td>
+<td class="center">Expires 7 September 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc8941" class="eref">8941</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-03-03" class="published">3 March 2023</time>
+<time datetime="2023-03-06" class="published">6 March 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-09-04">4 September 2023</time></dd>
+<dd class="expires"><time datetime="2023-09-07">7 September 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1128,7 +1128,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 4 September 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 September 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1351,7 +1351,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-intentionally-strict-proces">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-intentionally-strict-proces" class="section-name selfRef">Intentionally Strict Processing</a>
         </h3>
-<p id="section-1.1-1">This specification intentionally defines strict parsing and serialization behaviors using step-by-step algorithms; the only error handling defined is to fail the operation altogether.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-1">This specification intentionally defines strict parsing and serialization behaviors using step-by-step algorithms; the only error handling defined is to fail the entire operation altogether.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">It is designed to encourage faithful implementation and good interoperability. Therefore, an implementation that tried to be helpful by being more tolerant of input would make interoperability worse, since that would create pressure on other implementations to implement similar (but likely subtly different) workarounds.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 <p id="section-1.1-3">In other words, strict processing is an intentional feature of this specification; it allows non-conformant input to be discovered and corrected by the producer early and avoids both interoperability and security issues that might otherwise result.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
 <p id="section-1.1-4">Note that as a result of this strictness, if a field is appended to by multiple parties (e.g., intermediaries or different components in the sender), an error in one party's value is likely to cause the entire field value to fail parsing.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
@@ -1388,7 +1388,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
       </ul>
 <p id="section-2-3">Typically, this means that a field definition will specify the top-level type -- List, Dictionary, or Item -- and then define its allowable types and constraints upon them. For example, a header defined as a List might have all Integer members, or a mix of types; a header defined as an Item might allow only Strings, and additionally only strings beginning with the letter "Q", or strings in lowercase. Likewise, Inner Lists (<a href="#inner-list" class="auto internal xref">Section 3.1.1</a>) are only valid when a field definition explicitly allows them.<a href="#section-2-3" class="pilcrow">¶</a></p>
-<p id="section-2-4">When parsing fails, the entire field is ignored (see <a href="#text-parse" class="auto internal xref">Section 4.2</a>); in most situations, violating field-specific constraints should have the same effect. Thus, if a header is defined as an Item and required to be an Integer, but a String is received, the field will by default be ignored. If the field requires different error handling, this should be explicitly specified.<a href="#section-2-4" class="pilcrow">¶</a></p>
+<p id="section-2-4">When parsing fails, the entire field is ignored (see <a href="#text-parse" class="auto internal xref">Section 4.2</a>); in most situations, violating field-specific constraints should have the same effect. Thus, if a header is defined as an Item and required to be an Integer, but a String is received, the field will by default be ignored. If the field requires different handling for type mismatches it should be explicitly specified, but note that field definitions cannot override how parsing failures are handled.<a href="#section-2-4" class="pilcrow">¶</a></p>
 <p id="section-2-5">Both Items and Inner Lists allow parameters as an extensibility mechanism; this means that values can later be extended to accommodate more information, if need be. To preserve forward compatibility, field specifications are discouraged from defining the presence of an unrecognized parameter as an error condition.<a href="#section-2-5" class="pilcrow">¶</a></p>
 <p id="section-2-6">To further assure that this extensibility is available in the future, and to encourage consumers to use a complete parser implementation, a field definition can specify that "grease" parameters be added by senders. A specification could stipulate that all parameters that fit a defined pattern are reserved for this use and then encourage them to be sent on some portion of requests. This helps to discourage recipients from writing a parser that does not account for Parameters.<a href="#section-2-6" class="pilcrow">¶</a></p>
 <p id="section-2-7">Specifications that use Dictionaries can also allow for forward compatibility by requiring that the presence of -- as well as value and type associated with -- unknown members be ignored. Subsequent specifications can then add additional members, specifying constraints on them as appropriate.<a href="#section-2-7" class="pilcrow">¶</a></p>
@@ -2139,7 +2139,7 @@ Example-String: "foo
 Example-String: bar"
 </pre><a href="#section-4.2-9" class="pilcrow">¶</a>
 </div>
-<p id="section-4.2-10">If parsing fails -- including when calling another algorithm -- the entire field value MUST be ignored (i.e., treated as if the field were not present in the section). This is intentionally strict, to improve interoperability and safety, and specifications referencing this document are not allowed to loosen this requirement.<a href="#section-4.2-10" class="pilcrow">¶</a></p>
+<p id="section-4.2-10">If parsing fails, either the entire field value MUST be ignored (i.e., treated as if the field were not present in the section), or alternatively the complete HTTP message MUST be treated as malformed. This is intentionally strict to improve interoperability and safety, and field specifications that use Structured Fields are not allowed to loosen this requirement.<a href="#section-4.2-10" class="pilcrow">¶</a></p>
 <p id="section-4.2-11">Note that this requirement does not apply to an implementation that is not parsing the field; for example, an intermediary is not required to strip a failing field from a message before forwarding it.<a href="#section-4.2-11" class="pilcrow">¶</a></p>
 <div id="parse-list">
 <section id="section-4.2.1">
@@ -2861,6 +2861,8 @@ sf-date = "@" ["-"] 1*15DIGIT
         <li class="normal" id="appendix-D-2.3">Moved ABNF to an informative appendix. (<a href="#abnf" class="auto internal xref">Appendix C</a>)<a href="#appendix-D-2.3" class="pilcrow">¶</a>
 </li>
         <li class="normal" id="appendix-D-2.4">Added a "Structured Type" column to the HTTP Field Name Registry. (<a href="#iana" class="auto internal xref">Section 5</a>)<a href="#appendix-D-2.4" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="appendix-D-2.5">Refined parse failure handling. (<a href="#text-parse" class="auto internal xref">Section 4.2</a>)<a href="#appendix-D-2.5" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
