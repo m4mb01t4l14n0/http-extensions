@@ -197,7 +197,7 @@ Table of Contents
 5.1.  Signature
 
    The "Signature" HTTP Authentication Scheme uses asymmetric
-   cyptography.  User agents possess a user ID and a public/private key
+   cryptography.  User agents possess a user ID and a public/private key
    pair, and origin servers maintain a mapping of authorized user IDs to
    their associated public keys.  When using this scheme, the "u", "p",
    and "s" parameters are REQUIRED.  The TLS keying material export
@@ -216,7 +216,7 @@ Table of Contents
 
 5.2.  HMAC
 
-   The "HMAC" HTTP Authentication Scheme uses symmetric cyptography.
+   The "HMAC" HTTP Authentication Scheme uses symmetric cryptography.
    User agents possess a user ID and a secret key, and origin servers
    maintain a mapping of authorized user IDs to their associated secret
    key.  When using this scheme, the "u", "p", and "h" parameters are

@@ -3896,9 +3896,9 @@ Table of Contents
 
    [DIGEST]   Polli, R. and L. Pardue, "Digest Fields", Work in
               Progress, Internet-Draft, draft-ietf-httpbis-digest-
-              headers-10, 19 June 2022,
+              headers-11, 6 March 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-
-              digest-headers-10>.
+              digest-headers-11>.
 
    [JWS]      Jones, M., Bradley, J., and N. Sakimura, "JSON Web
               Signature (JWS)", RFC 7515, DOI 10.17487/RFC7515, May
