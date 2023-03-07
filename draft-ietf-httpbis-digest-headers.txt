@@ -6,7 +6,7 @@ HTTP                                                            R. Polli
 Internet-Draft                         Team Digitale, Italian Government
 Obsoletes: 3230 (if approved)                                  L. Pardue
 Intended status: Standards Track                              Cloudflare
-Expires: 7 September 2023                                   6 March 2023
+Expires: 8 September 2023                                   7 March 2023
 
 
                              Digest Fields
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 September 2023.
+   This Internet-Draft will expire on 8 September 2023.
 
 Copyright Notice
 
@@ -263,10 +263,10 @@ Table of Contents
 
    In order to address potential inconsistencies and ambiguity across
    implementations of Digest and Want-Digest, this document obsoletes
-   [RFC3230].  The Integrity fields (Section 3 and Section 2) and
-   Integrity preference fields (Section 4) defined in this document are
-   better aligned with current HTTP semantics and have names that more
-   clearly articulate the intended usages.
+   [RFC3230].  The Integrity fields (Sections 2 and 3) and Integrity
+   preference fields (Section 4) defined in this document are better
+   aligned with current HTTP semantics and have names that more clearly
+   articulate the intended usages.
 
 1.4.  Notational Conventions
 
@@ -1585,7 +1585,7 @@ Appendix E.  Migrating from RFC 3230
    While the syntax of Digest and Repr-Digest are different, the
    considerations and examples this document gives for Repr-Digest apply
    equally to Digest because they operate on the same input data; see
-   Section 3.1, Section 6 and Section 6.3.
+   Sections 3.1, 6 and 6.3.
 
    RFC 3230 could never communicate the digest of HTTP message content
    in the Digest field; Content-Digest now provides that capability.
