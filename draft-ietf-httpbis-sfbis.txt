@@ -1379,8 +1379,8 @@ Table of Contents
 
    8.   If type is "integer":
 
-        1.  Parse input_number as an integer and let output_number be
-            the product of the result and sign.
+        1.  Let output_number be an Integer that is the result of
+            parsing input_number as an integer.
 
    9.   Otherwise:
 
@@ -1389,10 +1389,12 @@ Table of Contents
         2.  If the number of characters after "." in input_number is
             greater than three, fail parsing.
 
-        3.  Parse input_number as a decimal number and let output_number
-            be the product of the result and sign.
+        3.  Let output_number be a Decimal that is the result of parsing
+            input_number as a decimal number.
 
-   10.  Return output_number.
+   10.  Let output_number be the product of output_number and sign.
+
+   11.  Return output_number.
 
 4.2.5.  Parsing a String
 
