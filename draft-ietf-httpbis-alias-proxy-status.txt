@@ -4,8 +4,8 @@
 
 HTTP                                                            T. Pauly
 Internet-Draft                                               Apple, Inc.
-Intended status: Standards Track                            7 March 2023
-Expires: 8 September 2023
+Intended status: Standards Track                            8 March 2023
+Expires: 9 September 2023
 
 
             HTTP Proxy-Status Parameter for Next-Hop Aliases
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 September 2023.
+   This Internet-Draft will expire on 9 September 2023.
 
 Copyright Notice
 
