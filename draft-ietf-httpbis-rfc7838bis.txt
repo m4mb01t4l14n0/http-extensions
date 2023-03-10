@@ -5,8 +5,8 @@
 HTTP Working Group                                        M. Bishop, Ed.
 Internet-Draft                                       Akamai Technologies
 Intended status: Standards Track                         M. Thomson, Ed.
-Expires: 9 September 2023                                        Mozilla
-                                                            8 March 2023
+Expires: 11 September 2023                                       Mozilla
+                                                           10 March 2023
 
 
                        HTTP Alternative Services
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 September 2023.
+   This Internet-Draft will expire on 11 September 2023.
 
 Copyright Notice
 

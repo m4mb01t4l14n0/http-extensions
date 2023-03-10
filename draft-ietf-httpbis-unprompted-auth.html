@@ -1065,7 +1065,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Schinazi, et al.</td>
-<td class="center">Expires 9 September 2023</td>
+<td class="center">Expires 11 September 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1078,12 +1078,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-httpbis-unprompted-auth-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-03-08" class="published">8 March 2023</time>
+<time datetime="2023-03-10" class="published">10 March 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-09-09">9 September 2023</time></dd>
+<dd class="expires"><time datetime="2023-09-11">11 September 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1149,7 +1149,7 @@ authentication scheme.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 9 September 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 11 September 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1313,6 +1313,21 @@ material exporter uses a label that starts with the characters
 "EXPORTER-HTTP-Unprompted-Authentication-" (see <a href="#schemes" class="auto internal xref">Section 5</a> for the labels and
 contexts used by each scheme). The TLS keying material exporter is used to
 generate a 32-byte key which is then used as a nonce.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-3">Because the TLS keying material exporter is only secure for authentication when
+it is uniquely bound to the TLS session <span>[<a href="#RFC7627" class="cite xref">RFC7627</a>]</span>, the Signature and HMAC
+authentication schemes require either one of the following properties:<a href="#section-2-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-4.1">The TLS version in use is greater or equal to 1.3 <span>[<a href="#TLS" class="cite xref">TLS</a>]</span>.<a href="#section-2-4.1" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-4.2">The TLS version in use is greater or equal to 1.2 and the Extended
+Master Secret extension <span>[<a href="#RFC7627" class="cite xref">RFC7627</a>]</span> has been negotiated.<a href="#section-2-4.2" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="section-2-5">Clients <span class="bcp14">MUST NOT</span> use the Signature and HMAC authentication
+schemes on connections that do not meet one of the two properties
+above. If a server receives a request that uses these authentication
+schemes on a connection that meets neither of the above properties,
+the server <span class="bcp14">MUST</span> treat the request as malformed.<a href="#section-2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="header-definition">
@@ -1484,6 +1499,9 @@ This constraint is met by modern Web browsers. If an attacker were to compromise
 the browser such that it could access another context's memory, the attacker
 might also be able to access the corresponding key, so binding authentication to
 requests would not provide much benefit in practice.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-3">Key material used for authentication in unprompted authentication, whether
+symmetric or asymmetric <span class="bcp14">MUST NOT</span> be reused in other protocols. Doing so can
+undermine the security guarantees of the authentication.<a href="#section-7-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana">
@@ -1602,6 +1620,10 @@ the "TLS Exporter Labels" registry maintained at
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7627">[RFC7627]</dt>
+        <dd>
+<span class="refAuthor">Bhargavan, K., Ed.</span>, <span class="refAuthor">Delignat-Lavaud, A.</span>, <span class="refAuthor">Pironti, A.</span>, <span class="refAuthor">Langley, A.</span>, and <span class="refAuthor">M. Ray</span>, <span class="refTitle">"Transport Layer Security (TLS) Session Hash and Extended Master Secret Extension"</span>, <span class="seriesInfo">RFC 7627</span>, <span class="seriesInfo">DOI 10.17487/RFC7627</span>, <time datetime="2015-09" class="refDate">September 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7627">https://www.rfc-editor.org/rfc/rfc7627</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
         <dd>
