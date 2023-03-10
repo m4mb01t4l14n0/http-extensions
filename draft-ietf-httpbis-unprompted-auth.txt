@@ -81,7 +81,7 @@ Table of Contents
    2.  Computing the Authentication Proof
    3.  Header Field Definition
    4.  Authentication Parameters
-     4.1.  The u Parameter
+     4.1.  The k Parameter
      4.2.  The p Parameter
      4.3.  The s Parameter
      4.4.  The h Parameter
@@ -89,15 +89,16 @@ Table of Contents
      5.1.  Signature
      5.2.  HMAC
      5.3.  Other HTTP Authentication Schemes
-   6.  Intermediary Considerations
-   7.  Security Considerations
-   8.  IANA Considerations
-     8.1.  Unprompted-Authentication Header Field
-     8.2.  HTTP Authentication Schemes Registry
-     8.3.  TLS Keying Material Exporter Labels
-   9.  References
-     9.1.  Normative References
-     9.2.  Informative References
+   6.  Server Handling
+   7.  Intermediary Considerations
+   8.  Security Considerations
+   9.  IANA Considerations
+     9.1.  Unprompted-Authentication Header Field
+     9.2.  HTTP Authentication Schemes Registry
+     9.3.  TLS Keying Material Exporter Labels
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -141,7 +142,7 @@ Table of Contents
    and key exchange mechanism [QUIC-TLS].
 
    The user agent leverages a TLS keying material exporter [KEY-EXPORT]
-   to generate a nonce which can be signed using the user's key.  The
+   to generate a nonce which can be signed using the chosen key.  The
    keying material exporter uses a label that starts with the characters
    "EXPORTER-HTTP-Unprompted-Authentication-" (see Section 5 for the
    labels and contexts used by each scheme).  The TLS keying material
@@ -178,16 +179,18 @@ Table of Contents
    This specification defines the following authentication parameters,
    they can be used by the authentication schemes defined in Section 5.
 
-4.1.  The u Parameter
+4.1.  The k Parameter
 
-   The OPTIONAL "u" (user ID) parameter is a byte sequence that
-   specifies the user ID that the user agent wishes to authenticate.
+   The OPTIONAL "k" (key ID) parameter is a byte sequence that
+   identifies which key the user agent wishes to use to authenticate.
+   This can for example be used to point to an entry into a server-side
+   database of known keys.
 
 4.2.  The p Parameter
 
    The OPTIONAL "p" (proof) parameter is a byte sequence that specifies
    the proof that the user agent provides to attest to possessing the
-   credential that matches its user ID.
+   credential that matches its key ID.
 
 4.3.  The s Parameter
 
@@ -213,39 +216,39 @@ Table of Contents
 5.1.  Signature
 
    The "Signature" HTTP Authentication Scheme uses asymmetric
-   cryptography.  User agents possess a user ID and a public/private key
-   pair, and origin servers maintain a mapping of authorized user IDs to
-   their associated public keys.  When using this scheme, the "u", "p",
+   cryptography.  User agents possess a key ID and a public/private key
+   pair, and origin servers maintain a mapping of authorized key IDs to
+   their associated public keys.  When using this scheme, the "k", "p",
    and "s" parameters are REQUIRED.  The TLS keying material export
    label for this scheme is "EXPORTER-HTTP-Unprompted-Authentication-
    Signature" and the associated context is empty.  The nonce is then
    signed using the selected asymmetric signature algorithm and
    transmitted as the proof directive.
 
-   For example, the user ID "john.doe" authenticating using Ed25519
+   For example, the key ID "basement" authenticating using Ed25519
    [ED25519] could produce the following header field (lines are folded
    to fit):
 
-   Unprompted-Authentication: Signature u=:am9obi5kb2U=:;s=7;
+   Unprompted-Authentication: Signature k=:YmFzZW1lbnQ=:;s=7;
    p=:SW5zZXJ0IHNpZ25hdHVyZSBvZiBub25jZSBoZXJlIHdo
    aWNoIHRha2VzIDUxMiBiaXRzIGZvciBFZDI1NTE5IQ==:
 
 5.2.  HMAC
 
    The "HMAC" HTTP Authentication Scheme uses symmetric cryptography.
-   User agents possess a user ID and a secret key, and origin servers
-   maintain a mapping of authorized user IDs to their associated secret
-   key.  When using this scheme, the "u", "p", and "h" parameters are
+   User agents possess a key ID and a secret key, and origin servers
+   maintain a mapping of authorized key IDs to their associated secret
+   key.  When using this scheme, the "k", "p", and "h" parameters are
    REQUIRED.  The TLS keying material export label for this scheme is
    "EXPORTER-HTTP-Unprompted-Authentication-HMAC" and the associated
    context is empty.  The nonce is then HMACed using the selected HMAC
    algorithm and transmitted as the proof directive.
 
-   For example, the user ID "john.doe" authenticating using HMAC-SHA-512
+   For example, the key ID "basement" authenticating using HMAC-SHA-512
    [SHA] could produce the following header field (lines are folded to
    fit):
 
-   Unprompted-Authentication: HMAC u="am9obi5kb2U=";h=6;
+   Unprompted-Authentication: HMAC k="YmFzZW1lbnQ=";h=6;
    p="SW5zZXJ0IEhNQUMgb2Ygbm9uY2UgaGVyZSB3aGljaCB0YWtl
    cyA1MTIgYml0cyBmb3IgU0hBLTUxMiEhISEhIQ=="
 
@@ -256,7 +259,26 @@ Table of Contents
    authschemes.xhtml> contains entries not defined in this document.
    Those entries MAY be used with Unprompted Authentication.
 
-6.  Intermediary Considerations
+6.  Server Handling
+
+   Servers that wish to introduce resources whose existence cannot be
+   probed need to ensure that they do not reveal any information about
+   those resources to unauthenticated clients.  In particular, such
+   servers MUST respond to authentication failures with the exact same
+   response that they would have used for non-existent resources.  For
+   example, this can mean using HTTP status code 404 (Not Found) instead
+   of 401 (Unauthorized).  Such authentication failures can be caused
+   for example by: * absence of the Unprompted-Authentication field *
+   failure to parse the Unprompted-Authentication field * use of
+   Unprompted Authentication with an unknown key ID * failure to
+   validate the signature or MAC.
+
+   Such servers MUST also ensure that the timing of their request
+   handling does not leak any information.  This can be accomplished by
+   delaying responses to all non-existent resources such that the timing
+   of the authentication verification is not observable.
+
+7.  Intermediary Considerations
 
    Since the Signature and HMAC HTTP Authentication Schemes leverage TLS
    keying material exporters, their output cannot be transparently
@@ -265,9 +287,9 @@ Table of Contents
    client themselves, then inform the upstream HTTP server of the
    presence of valid authentication using some other mechanism.
 
-7.  Security Considerations
+8.  Security Considerations
 
-   Unprompted Authentication allows a user-agent to authenticate to an
+   Unprompted Authentication allows a user agent to authenticate to an
    origin server while guaranteeing freshness and without the need for
    the server to transmit a nonce to the user agent.  This allows the
    server to accept authenticated clients without revealing that it
@@ -277,8 +299,8 @@ Table of Contents
    extensions.
 
    The authentication proofs described in this document are not bound to
-   individual HTTP requests; if the same user sends an authentication
-   proof on multiple requests they will all be identical.  This allows
+   individual HTTP requests; if the key is used for authentication
+   proofs on multiple requests they will all be identical.  This allows
    for better compression when sending over the wire, but implies that
    client implementations that multiplex different security contexts
    over a single HTTP connection need to ensure that those contexts
@@ -295,9 +317,9 @@ Table of Contents
    protocols.  Doing so can undermine the security guarantees of the
    authentication.
 
-8.  IANA Considerations
+9.  IANA Considerations
 
-8.1.  Unprompted-Authentication Header Field
+9.1.  Unprompted-Authentication Header Field
 
    This document will request IANA to register the following entry in
    the "HTTP Field Name" registry maintained at
@@ -309,7 +331,7 @@ Table of Contents
    Reference:  This document
    Comments:  None
 
-8.2.  HTTP Authentication Schemes Registry
+9.2.  HTTP Authentication Schemes Registry
 
    This document, if approved, requests IANA to add two new entries to
    the "HTTP Authentication Schemes" Registry maintained at
@@ -321,7 +343,7 @@ Table of Contents
 
    *  HMAC
 
-8.3.  TLS Keying Material Exporter Labels
+9.3.  TLS Keying Material Exporter Labels
 
    This document, if approved, requests IANA to register the following
    entries in the "TLS Exporter Labels" registry maintained at
@@ -337,9 +359,9 @@ Table of Contents
    Recommended:  Y
    Reference:  This document
 
-9.  References
+10.  References
 
-9.1.  Normative References
+10.1.  Normative References
 
    [HTTP]     Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke,
               Ed., "HTTP Semantics", STD 97, RFC 9110,
@@ -375,7 +397,7 @@ Table of Contents
               Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
               <https://www.rfc-editor.org/rfc/rfc8446>.
 
-9.2.  Informative References
+10.2.  Informative References
 
    [ED25519]  Josefsson, S. and J. Schaad, "Algorithm Identifiers for
               Ed25519, Ed448, X25519, and X448 for Use in the Internet
