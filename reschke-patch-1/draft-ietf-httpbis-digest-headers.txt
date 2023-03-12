@@ -657,7 +657,7 @@ Table of Contents
    metadata, for instance different compression levels would all use the
    same "Content-Encoding: gzip" field.  Other examples include where
    encoding relies on nonces or timestamps, such as the aes128gcm
-   content coding defined [RFC8188].
+   content coding defined in [RFC8188].
 
    Since it is possible for there to be variation within content coding,
    the checksum conveyed by the integrity field cannot be used to
